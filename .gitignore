@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.vscode/
+tem.txt
+data/config.json
+data/sessions/*
+!data/sessions/.gitkeep
+user_characters/*
+!user_characters/.gitkeep
+granite-embedding-r2/
