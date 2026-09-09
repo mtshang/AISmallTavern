@@ -69,7 +69,7 @@ async def tavern_loop(appcontext: AppContext) -> str:
             "\n"
             "环境变量配置出现错误："
             f"{appcontext.config_env_error}\n"
-            "请修改项目根目录中的 .env，然后重新启动程序。\n"
+            "请修改项目根目录中的 .env（或者查看.env.example），然后重新启动程序。\n"
         )
     else:
         history_display = ""

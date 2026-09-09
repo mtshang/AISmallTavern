@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 .vscode/
 tem.txt
+PyInstaller.txt
 build/
 dist/
 AISmallTavern.spec
