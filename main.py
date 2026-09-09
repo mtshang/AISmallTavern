@@ -5,6 +5,7 @@ import asyncio
 import json
 from pathlib import Path
 from dotenv import load_dotenv
+import sys
 
 import model_connect
 import ui
@@ -21,7 +22,12 @@ def main() -> None:
     2. 针对操作系统级物理信号和控制台异常进行顶层拦截兜底。
     3. 在退出全屏缓冲区后安全输出退出日志。
     """
-    BASE_DIR: Path = Path(__file__).resolve().parent
+    BASE_DIR: Path
+
+    if getattr(sys, "frozen", False):
+        BASE_DIR = Path(sys.executable).resolve().parent
+    else:
+        BASE_DIR = Path(__file__).resolve().parent
 
     CONFIG_PATH: Path = BASE_DIR / "user_data" / "config.json"
     DEFAULT_CONFIG_PATH: Path = BASE_DIR / "assets" / "default" / "default_config.json"
