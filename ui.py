@@ -18,11 +18,23 @@ from prompt_toolkit.styles import Style
 
 import model_connect
 import file_operate
-from app_context import AppContext, get_current_time_iso
+from app_context import AppContext
+from app_context import get_current_time_iso
 
 
 @dataclass
 class UIState:
+    """
+    保存一次终端全屏交互运行所需的状态数据。
+    
+    属性说明：
+    - busy: 标记 AI 协程是否正在向 output_buffer 追加流式数据，用于阻断用户重复提交并修改状态栏。
+    - notice: 存储一次性警告或系统临时提示，用户按键输入时会自动清空。
+    - follow_output: 视口滚动锁定开关。
+        * True: 输出区域自动滚动并追踪追加文本的最底部（自动吸附）。
+        * False: 用户正在使用 PageUp/Down 查阅历史记录，禁止自动拉扯游标到底部。
+    - exit_message: 退出全屏 TUI 模式后，向标准输出 stdout 打印的最终进程总结文本。
+    """
     busy: bool = False
     notice: str = ""
     follow_output: bool = True
@@ -30,6 +42,12 @@ class UIState:
 
 
 async def tavern_loop(appcontext: AppContext) -> str:
+    """
+    AI 酒馆的主终端交互异步事件循环。
+    
+    返回：
+        str: 退出应用时拟输出到标准输出终态的 exit_message。
+    """
     state = UIState()
 
     credential_status = f"已配置（***{appcontext.llm_api_key[-3:]}）" if appcontext.llm_api_key else "未配置"
@@ -76,6 +94,13 @@ async def tavern_loop(appcontext: AppContext) -> str:
     )
 
     def clear_notice_when_editing(_: Buffer) -> None:
+        """
+        Buffer 文本变化事件回调（Event Handler）。
+        
+        参数说明：
+            参数名 `_` 只是 Python 社区惯例，表示“协议要求接收，但函数体不使用”。
+            `_` 仍然是完全正常的变量名，解释器不会赋予它特殊的忽略语义。
+        """
         state.notice = ""
 
     input_buffer = Buffer(
@@ -105,6 +130,12 @@ async def tavern_loop(appcontext: AppContext) -> str:
     )
 
     def get_header_text() -> list[tuple[str, str]]:
+        """
+        动态拉取当前配置的模型名称，并在顶部标题栏显示。
+        
+        这里每次读取的是已经加载到模块变量中的 LLM_MODEL；
+        它不会在每一帧自动重新读取磁盘上的 `.env`。要重新加载配置，需要显式再次调用加载逻辑。
+        """
         return [
             (
                 "class:header",
@@ -113,6 +144,10 @@ async def tavern_loop(appcontext: AppContext) -> str:
         ]
 
     def get_status_text() -> list[tuple[str, str]]:
+        """
+        根据 state 的当前状态生成状态栏文本的返回值列表
+        按照 [state.notice -> state.busy -> else] 的优先级梯度降级判断展示文本。
+        """
         if state.notice:
             return [
                 (
@@ -194,8 +229,15 @@ async def tavern_loop(appcontext: AppContext) -> str:
     app: Application
 
     def append_output(text: str) -> None:
+        """
+        在 Application 所在事件循环中，向只读输出缓冲区追加文本。
+        
+        参数说明：
+            text (str): 待追加的增量文本碎片。
+        """
         old_cursor_position = output_buffer.cursor_position
         new_text = output_buffer.text + text
+
         if state.follow_output:
             new_cursor_position = len(new_text)
         else:
@@ -211,10 +253,18 @@ async def tavern_loop(appcontext: AppContext) -> str:
             ),
             bypass_readonly=True,
         )
+
         app.invalidate()
 
     def get_page_size() -> int:
+        """
+        参考 Window 上一帧的物理高度，计算逻辑行翻页步长。
+        
+        返回：
+            int: 单页步长行数。
+        """
         render_info = output_window.render_info
+
         if render_info is None:
             return 10
 
@@ -224,6 +274,16 @@ async def tavern_loop(appcontext: AppContext) -> str:
         )
 
     async def stream_ai_reply(user_text: str) -> None:
+        """
+        AI 响应的异步模拟任务协程。
+
+        参数：
+            user_text：用户输入的字符串
+
+        异常处理规范：
+            - asyncio.CancelledError: 在应用退出被 cancel 时必须原样 re-raise，不能吞没，以完成协程栈清理。
+            - Exception: 兜底通用运行时异常并输出到 TUI，防止崩溃退出。
+        """
         full_content: str | None = None
         full_reasoning: str | None = None
         full_content_list: list[str] = []
@@ -251,7 +311,7 @@ async def tavern_loop(appcontext: AppContext) -> str:
                     while True:
                         hex_ran_num = hex(random.randint(0, 268436455))
                         session_id = f"{character_name}_{hex_ran_num}.json"
-                        session_path: Path = appcontext.base_dir / "data" / "sessions" / f"{session_id}"
+                        session_path: Path = appcontext.base_dir / "user_data" / "sessions" / f"{session_id}"
                         if not session_path.exists():
                             break
                     session: dict[str, Any] = {
@@ -306,7 +366,7 @@ async def tavern_loop(appcontext: AppContext) -> str:
                 
                 if appcontext.session_path and appcontext.session:
                     file_operate.write_json_atomic(appcontext.session_path, appcontext.session)
-                    file_operate.write_json_atomic(appcontext.base_dir / "data" / "config.json", appcontext.config)
+                    file_operate.write_json_atomic(appcontext.base_dir / "user_data" / "config.json", appcontext.config)
 
         except asyncio.CancelledError:
             raise
@@ -320,11 +380,22 @@ async def tavern_loop(appcontext: AppContext) -> str:
             app.invalidate()
 
     def request_exit(event, message: str) -> None:
+        """
+        终端显示告别词，并中断 Application 事件循环。
+        参数：
+            event：上一级按键回调转交过来的一个按键事件对象，包含当前正在处理这个按键的 Application
+            message：告别词
+        """
         state.exit_message = message
         event.app.exit()
 
     @kb.add("enter", eager=True)
     def submit(event) -> None:
+        """
+        按下回车键触发函数。
+
+        读入输入框字符串，对字符串判断。可能清空输入框。
+        """
         user_text = input_buffer.text
 
         if user_text.casefold() == "/=exit":
@@ -365,6 +436,7 @@ async def tavern_loop(appcontext: AppContext) -> str:
 
     @kb.add("pageup", eager=True)
     def scroll_output_up(event) -> None:
+        """向上整页滚动屏幕浏览历史记录。"""
         state.follow_output = False
         output_buffer.cursor_up(
             count=get_page_size(),
@@ -373,6 +445,7 @@ async def tavern_loop(appcontext: AppContext) -> str:
 
     @kb.add("pagedown", eager=True)
     def scroll_output_down(event) -> None:
+        """向下整页滚动屏幕浏览历史记录。"""
         document = output_buffer.document
         page_size = get_page_size()
         if (
@@ -393,12 +466,14 @@ async def tavern_loop(appcontext: AppContext) -> str:
 
     @kb.add("c-home", eager=True)
     def scroll_output_to_top(event) -> None:
+        """Ctrl + Home 组合键：直接跳跃至输出区域顶部。"""
         state.follow_output = False
         output_buffer.cursor_position = 0
         event.app.invalidate()
 
     @kb.add("c-end", eager=True)
     def scroll_output_to_bottom(event) -> None:
+        """Ctrl + End 组合键：直接跳跃至输出区域底部。"""
         output_buffer.cursor_position = len(
             output_buffer.text
         )

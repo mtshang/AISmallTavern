@@ -13,10 +13,18 @@ from app_context import AppContext
 
 
 def main() -> None:
+    """
+    程序的同步顶层主入口。
+    
+    职责：
+    1. 使用 asyncio.run 初始化全新的事件循环并驱动 tavern_loop。
+    2. 针对操作系统级物理信号和控制台异常进行顶层拦截兜底。
+    3. 在退出全屏缓冲区后安全输出退出日志。
+    """
     BASE_DIR: Path = Path(__file__).resolve().parent
 
-    CONFIG_PATH: Path = BASE_DIR / "data" / "config.json"
-    DEFAULT_CONFIG_PATH: Path = BASE_DIR / "data" / "default" / "default_config.json"
+    CONFIG_PATH: Path = BASE_DIR / "user_data" / "config.json"
+    DEFAULT_CONFIG_PATH: Path = BASE_DIR / "assets" / "default" / "default_config.json"
     CONFIG: dict[str, Any]
     try:
         if not CONFIG_PATH.is_file():
@@ -35,10 +43,10 @@ def main() -> None:
             CONFIG = json.load(file)
 
     SESSION: dict[str, Any] | None = None
-    DEFAULT_SESSION_PATH: Path = BASE_DIR / "data" / "default" / "default_session.json"
+    DEFAULT_SESSION_PATH: Path = BASE_DIR / "assets" / "default" / "default_session.json"
     try:
         session_id: str = CONFIG.get("session_id", "")
-        SESSION_PATH: Path | None = (BASE_DIR / "data" / "sessions" / f"{session_id}") if session_id else None
+        SESSION_PATH: Path | None = (BASE_DIR / "user_data" / "sessions" / f"{session_id}") if session_id else None
         if not (session_id and SESSION_PATH.is_file()):
             raise FileNotFoundError("会话未指定或文件不存在")
 
@@ -55,24 +63,25 @@ def main() -> None:
         with DEFAULT_SESSION_PATH.open("r", encoding="utf-8") as file:
             SESSION = json.load(file)
 
-    character_id: str = CONFIG.get("current_character_id", "")
-    CHARACTER_PATH: Path = BASE_DIR / "user_characters" / f"{character_id}"
     DEFAULT_CHARACTER_ID: str = "默认猫娘default_cat.md"
-    DEFAULT_CHARACTER_PATH: Path = BASE_DIR / "data" / "default" / "默认猫娘default_cat.md"
+    DEFAULT_CHARACTER_PATH: Path = BASE_DIR / "assets" / "default" / "默认猫娘default_cat.md"
+    CHARACTER_PATH: Path
     CHARACTER_PROMPT: str
     try:
         character_id: str = CONFIG.get("current_character_id", "")
-        CHARACTER_PATH: Path | None = (BASE_DIR / "user_characters" / f"{character_id}") if character_id else None
+        target_path: Path | None = (BASE_DIR / "user_data" / "characters" / f"{character_id}") if character_id else None
 
-        if not (CHARACTER_PATH and CHARACTER_PATH.is_file()):
-            CHARACTER_PATH = (BASE_DIR / "data" / "default" / f"{character_id}") if character_id else None
-            if not (CHARACTER_PATH and CHARACTER_PATH.is_file()):
+        if not (target_path and target_path.is_file()):
+            target_path = (BASE_DIR / "assets" / "default" / f"{character_id}") if character_id else None
+            if not (target_path and target_path.is_file()):
                 raise FileNotFoundError("角色未指定或角色文件不存在")
 
-        CHARACTER_PROMPT = CHARACTER_PATH.read_text(encoding="utf-8")
+        CHARACTER_PROMPT = target_path.read_text(encoding="utf-8")
 
         if not CHARACTER_PROMPT.strip():
             raise ValueError("角色设定文件内容为空")
+
+        CHARACTER_PATH = target_path
 
     except Exception:
         CONFIG["current_character_id"] = DEFAULT_CHARACTER_ID
@@ -90,6 +99,7 @@ def main() -> None:
         LLM_API_KEY = model_connect.require_env("LLM_API_KEY")
         LLM_BASE_URL = model_connect.require_env("LLM_BASE_URL")
         LLM_MODEL = model_connect.require_env("LLM_MODEL")
+
     except RuntimeError as error:
         CONFIG_ENV_ERROR = str(error)
         print(f"获取环境变量（api key、base url、model）出错了，错误为：{error}")
@@ -113,12 +123,16 @@ def main() -> None:
     try:
         exit_message = asyncio.run(ui.tavern_loop(appcontext))
     except KeyboardInterrupt:
-        exit_message = "[系统] 已收到 Ctrl+C，离开酒馆。"
+        exit_message = (
+            "[系统] 已收到 Ctrl+C，离开酒馆。"
+        )
     except EOFError:
-        exit_message = "[系统] 输入流已关闭，离开酒馆。"
+        exit_message = (
+            "[系统] 输入流已关闭，离开酒馆。"
+        )
 
     if appcontext.config.get("session_id") and appcontext.session:
-        SESSION_PATH: Path = BASE_DIR / "data" / "sessions" / f"{appcontext.config['session_id']}"
+        SESSION_PATH: Path = BASE_DIR / "user_data" / "sessions" / f"{appcontext.config['session_id']}"
         file_operate.write_json_atomic(SESSION_PATH, appcontext.session)
 
     file_operate.write_json_atomic(CONFIG_PATH, appcontext.config)

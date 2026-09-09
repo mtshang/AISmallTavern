@@ -4,9 +4,12 @@ __pycache__/
 *.py[cod]
 .vscode/
 tem.txt
-data/config.json
-data/sessions/*
-!data/sessions/.gitkeep
-user_characters/*
-!user_characters/.gitkeep
+build/
+dist/
+AISmallTavern.spec
+user_data/config.json
+user_data/sessions/*
+!user_data/sessions/.gitkeep
+user_data/characters/*
+!user_data/characters/.gitkeep
 granite-embedding-r2/

@@ -17,6 +17,7 @@ AI 小酒馆在终端中提供固定输入区和流式聊天界面，通过兼�
 - **多轮上下文**：组织 `system / user / assistant` 消息，续聊时将当前会话的历史消息一并传入模型。
 - **Markdown 角色设定**：从 UTF-8 `.md` 文件读取人设，新会话保存角色提示词快照。
 - **本地会话存档**：以 JSON 保存消息、角色和 UTC+8 时间戳，重启后恢复配置指定的会话。
+- **用户数据集中管理**：配置、会话和自定义角色集中存放在 `user_data/`，便于备份和跨版本迁移；模型凭证 `.env` 单独保留在项目根目录。
 - **逐轮保存**：取得有效的完整回复后记录本轮消息，依次保存会话和配置；正常退出时再次保存。
 - **终端交互**：固定底部输入框、状态提示、历史文本显示、键盘翻页和输出自动跟随。
 - **配置与异常处理**：读取 `.env`；对缺失配置、部分无效 JSON 结构和缺失角色提供提示或默认值回退。
@@ -77,7 +78,7 @@ LLM_MODEL=
 
 请在支持交互输入的终端运行，例如 PowerShell 或 VS Code 的集成终端。程序使用整个终端内容区域绘制界面。
 
-首次启动会使用默认角色。在首轮成功取得非空回复后，程序才会创建新的会话文件。无需提前创建 `data/config.json` 或会话 JSON，但仓库中的 `data/default/` 默认文件必须保留。
+首次启动会使用默认角色。在首轮成功取得非空回复后，程序才会创建新的会话文件。无需提前创建 `user_data/config.json` 或会话 JSON，但仓库中的 `assets/default/` 默认文件必须保留。
 
 ## 操作方式
 
@@ -96,13 +97,13 @@ LLM_MODEL=
 
 ## 角色与会话
 
-目前通过文件配置选择角色和会话，尚未提供界面内的选择菜单。请先退出程序，再修改 `data/config.json`，避免运行中的内存配置覆盖你的手动修改。
+目前通过文件配置选择角色和会话，尚未提供界面内的选择菜单。请先退出程序，再修改 `user_data/config.json`，避免运行中的内存配置覆盖你的手动修改。
 
 ### 使用自定义角色
 
-1. 在 `user_characters/` 下创建 UTF-8 Markdown 文件，例如 `my_character.md`。
+1. 在 `user_data/characters/` 下创建 UTF-8 Markdown 文件，例如 `my_character.md`。
 2. 写入角色身份、性格、说话方式等设定，文件内容不能全为空白。
-3. 在 `data/config.json` 中设置角色文件名，并清空当前会话 ID：
+3. 在 `user_data/config.json` 中设置角色文件名，并清空当前会话 ID：
 
 ```json
 {
@@ -111,9 +112,9 @@ LLM_MODEL=
 }
 ```
 
-如果还没有 `data/config.json`，可以先正常启动并退出一次，或复制 `data/default/default_config.json` 后编辑。
+如果还没有 `user_data/config.json`，可以先正常启动并退出一次，或将 `assets/default/default_config.json` 复制为 `user_data/config.json` 后编辑。
 
-程序优先在 `user_characters/` 中寻找同名文件，再检查 `data/default/`，找不到或内容为空时使用内置默认角色。
+程序优先在 `user_data/characters/` 中寻找同名文件，再检查 `assets/default/`，找不到或内容为空时使用内置默认角色。
 
 已有会话使用创建时保存的 `system` 消息。修改角色文件或 `current_character_id` 不会自动替换旧会话中的设定；要让新设定用于新一轮会话，请同时把 `session_id` 设为 `""`。
 
@@ -121,7 +122,7 @@ LLM_MODEL=
 
 - **新建会话**：退出后将 `session_id` 改成 `""`，重新启动。旧会话文件会保留。
 - **继续上次会话**：保留配置即可，程序会尝试恢复该文件。
-- **恢复指定会话**：将 `session_id` 设置为 `data/sessions/` 中的完整文件名，包含 `.json` 扩展名。
+- **恢复指定会话**：将 `session_id` 设置为 `user_data/sessions/` 中的完整文件名，包含 `.json` 扩展名。
 
 `session_id` 保存文件名，不保存绝对路径。会话文件无法加载时，程序会回退到未选择会话的状态。
 
@@ -159,6 +160,37 @@ LLM_MODEL=
 
 “本地保存”指存档位置在本机。聊天时，角色设定、当前会话历史和本轮消息仍会发送给 `LLM_BASE_URL` 指定的模型服务。存档和 `.env` 均为明文文件。
 
+## 更新版本与数据迁移
+
+### 使用新目录结构的版本之间升级
+
+**更新到新版本时，将旧版本的整个 `user_data` 文件夹复制到新版本项目根目录即可迁移用户配置、自定义角色和会话存档。**复制后应保持 `新版本根目录/user_data/config.json` 这样的层级，不要多嵌套一层 `user_data/user_data/`。
+
+1. 退出正在运行的程序，先备份旧版本的 `user_data/` 和根目录的 `.env`。
+2. 将新版本下载或解压到一个新目录，保留旧版本作为备份。
+3. 把旧版本的整个 `user_data/` 复制到新版本根目录，与发行包中的空用户数据目录合并；若新目录仅有默认生成的配置，可用旧配置替换它。
+4. **单独复制旧版本根目录的 `.env` 到新版本根目录。**它不在 `user_data/` 中，包含模型服务地址、模型名称和 API Key，请妥善保管。
+5. 按新版本的启动说明运行，确认当前会话和自定义角色能够正常加载后，再自行处理旧版本备份。
+
+如果新版本目录已经产生了需要保留的用户数据，请先备份两边的数据，再处理同名配置或存档，不要直接批量覆盖。
+
+`assets/default/` 是随版本更新的默认资源，应保留新版本提供的内容，无需用旧版本的默认资源覆盖。虚拟环境 `.venv/` 不属于用户数据，也无需随 `user_data/` 一起复制；按源码方式运行时，依照新版本的 `requirements.txt` 准备依赖即可。
+
+以上直接复制方式适用于用户数据格式兼容的版本；若未来版本调整存档结构并要求额外转换，请以对应发行说明为准。
+
+### 从旧版目录结构迁移
+
+如果你下载的是调整目录前的 v0.1，尚没有 `user_data/`，首次迁移时请先退出程序并备份，再按下表复制：
+
+| 旧版本位置 | 新版本位置 |
+| --- | --- |
+| `data/config.json` | `user_data/config.json` |
+| `data/sessions/` 中的会话文件 | `user_data/sessions/` |
+| `user_characters/` 中的角色文件 | `user_data/characters/` |
+| 根目录的 `.env` | 新版本根目录的 `.env` |
+
+旧位置不存在时跳过对应项；复制时保留原文件名。无需迁移旧版 `data/default/`，使用新发行包中的 `assets/default/` 即可。完成这一次目录调整后，后续升级就可以按上一节直接复制整个 `user_data/`。
+
 ## 项目结构
 
 ```text
@@ -170,21 +202,26 @@ aismalltavern/
 ├── file_operate.py
 ├── requirements.txt
 ├── .env.example
+├── .env模板.txt
+├── .env                          # 本地模型配置，请勿提交或随发行包分发
 ├── .gitignore
 ├── README.md
 ├── LICENSE
 ├── NOTICE
-├── data/
-│   ├── default/
-│   │   ├── default_config.json
-│   │   ├── default_session.json
-│   │   └── 默认猫娘default_cat.md
-│   ├── config.json               # 运行时生成，不提交
-│   └── sessions/                 # 本地会话，不提交其内容
-│       └── .gitkeep
-└── user_characters/              # 本地自定义角色，不提交其内容
-    └── .gitkeep
+├── assets/
+│   └── default/                  # 随版本提供的默认资源
+│       ├── default_config.json
+│       ├── default_session.json
+│       └── 默认猫娘default_cat.md
+└── user_data/                    # 用户数据；升级时迁移整个文件夹
+    ├── config.json               # 运行时生成的用户配置，请勿提交
+    ├── characters/               # 本地自定义角色，请勿提交其内容
+    │   └── .gitkeep
+    └── sessions/                 # 本地会话存档，请勿提交其内容
+        └── .gitkeep
 ```
+
+`assets/default/` 保存程序随附的默认资源，`user_data/` 保存用户自己的数据。除根目录的 `.env` 外，用户配置、角色与会话均集中在 `user_data/` 中；发行包只保留空的用户角色和会话目录，不应包含真实用户数据或凭证。
 
 | 模块 | 职责 |
 | --- | --- |

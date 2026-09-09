@@ -12,6 +12,11 @@ from app_context import AppContext
 
 
 def require_env(name: str) -> str:
+    """
+    【读取必需的环境变量。
+
+    如果环境变量不存在或未设置，抛出RuntimeError。】
+    """
     value = os.getenv(name)
 
     if not value or not value.strip():
@@ -27,6 +32,12 @@ def require_env(name: str) -> str:
 
 
 async def chat_with_model(appcontext: AppContext, user_text: str, messages: list[dict]) -> AsyncGenerator[str, None]:
+    """
+    异步请求模型，以流式方式接收回复。
+
+    返回值：
+        yield返回增量文本
+    """
     api_key = appcontext.llm_api_key
     base_url = appcontext.llm_base_url
     model = appcontext.llm_model

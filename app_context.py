@@ -10,6 +10,13 @@ from datetime import datetime, timedelta, timezone
     slots=True,
 )
 class AppContext:
+    """
+    当前程序运行过程中需要共享的上下文数据。
+
+    slots=True：
+            只允许使用类中声明过的字段，
+            可以减少误写属性名称的问题。
+    """
     base_dir: Path
     llm_api_key: str | None = field(
         repr=False,
@@ -26,13 +33,19 @@ class AppContext:
     character_prompt: str
 
     session: dict[str, Any] | None = None
-    
     session_path: Path | None = None
 
     def change_config(
         self,
         new_config: dict[str, Any],
     ) -> None:
+        """
+        更新config。
+
+        参数：
+            new_config:
+                新的 config 。
+        """
         self.config = new_config
 
     def change_session(
@@ -40,14 +53,30 @@ class AppContext:
         new_session: dict[str, Any],
         new_session_id: str,
     ) -> None:
+        """
+        更新session、session_path和config["session_id"]。
+
+        参数：
+            new_session:
+                新的 session 。
+            new_session_path
+                新的 session_path 。
+        """
         self.session = new_session
-        self.session_path = self.base_dir / "data" / "sessions" / f"{new_session_id}"
+        self.session_path = self.base_dir / "user_data" / "sessions" / f"{new_session_id}"
         self.config["session_id"] = new_session_id
 
     def change_character(
         self,
         new_character_path: str | Path,
     ) -> None:
+        """
+        切换当前角色，并同步更新character_path、character_prompt和config["current_character_id"]。
+
+        参数：
+            new_character_path:
+                新角色 Markdown 文件的完整路径。
+        """
         new_path = Path(
             new_character_path
         )
@@ -69,6 +98,12 @@ class AppContext:
         )
 
 def get_current_time_iso() -> str:
+    """
+    返回带有 UTC+8 时区信息的当前时间字符串。
+
+    示例：
+        2026-09-07T20:30:00+08:00
+    """
     CHINA_TIMEZONE = timezone(
         timedelta(hours=8)
     )
