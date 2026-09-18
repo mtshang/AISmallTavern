@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 .vscode/
 tem.txt
+tem.json
 PyInstaller.txt
 build/
 dist/
@@ -12,5 +13,11 @@ user_data/config.json
 user_data/sessions/*
 !user_data/sessions/.gitkeep
 user_data/characters/*
-!user_data/characters/.gitkeep
+!user_data/characters/示例角色/
 granite-embedding-r2/
+assets/default/*/metadata.json
+assets/default/*/rag.faiss
+assets/default/*/title_to_content.json
+user_data/characters/*/metadata.json
+user_data/characters/*/rag.faiss
+user_data/characters/*/title_to_content.json

@@ -4,22 +4,27 @@ AI Small Tavern
 Project-authored code is licensed under the PolyForm Noncommercial License 1.0.0.
 See LICENSE for the full terms. Third-party components retain their own licenses.
 
-Optional third-party model resource (not loaded by the current application):
+Third-party model resource (required by the RAG feature):
 Model Name: granite-embedding-311m-multilingual-r2
 Source: https://huggingface.co/ibm-granite/granite-embedding-311m-multilingual-r2
-License: Apache License, Version 2.0
-Local directory, if present: granite-embedding-r2/
-The model directory is excluded by .gitignore and is not required to run this project.
+License: Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+Local directory: granite-embedding-r2/
+
+This model is not included in this repository; the directory is excluded by
+.gitignore. Download it with download_embedding_model.py (or 下载向量化模型.bat),
+which also places the Apache 2.0 license text in the model directory.
+The RAG retrieval feature requires this model.
+
 If you redistribute these model files, retain their upstream license and notices.
-The full license text accompanying the local model is granite-embedding-r2/LICENSE.
 
 本项目原创代码采用 PolyForm Noncommercial License 1.0.0，完整条款见 LICENSE。
 第三方组件保留各自的许可证，本项目的非商业许可不改变其原有授权。
 
-可选第三方模型：granite-embedding-311m-multilingual-r2。
+第三方模型资源（RAG 长期记忆功能所需）：granite-embedding-311m-multilingual-r2。
 来源：https://huggingface.co/ibm-granite/granite-embedding-311m-multilingual-r2
-模型许可证：Apache 2.0。
-若本地存在 granite-embedding-r2/，它属于未接入的实验资源，
-当前程序不加载它，该目录已被 .gitignore 排除，运行项目无需下载模型。
-重新分发模型文件时，应保留模型随附的许可证及上游声明；
-本地模型随附的许可证路径为 granite-embedding-r2/LICENSE。
+模型许可证：Apache 2.0（https://www.apache.org/licenses/LICENSE-2.0）。
+
+仓库不包含模型文件，该目录已被 .gitignore 排除；
+请使用 download_embedding_model.py（或双击 下载向量化模型.bat）下载，
+下载脚本会在模型目录中放置许可证文本。
+重新分发模型文件时，应保留其上游许可证及声明。

@@ -3,3 +3,13 @@
 openai==3.8.0
 prompt-toolkit==3.0.53
 python-dotenv==1.2.3
+
+# RAG 长期记忆：本地嵌入模型与向量检索
+faiss-cpu==1.15.0
+numpy==2.5.3
+sentence-transformers==6.0.1
+
+# download_embedding_model.py 直接导入它来下载模型。
+# sentence-transformers 也会带入这个包，但显式声明更稳妥：
+# 让下载脚本不依赖那条传递依赖链。
+huggingface-hub==1.31.0

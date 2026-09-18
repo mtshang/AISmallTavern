@@ -1,0 +1,44 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "roll_dice",
+            "description": "投掷指定面数的骰子，重复指定次数。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "sides": {
+                        "type": "integer",
+                        "description": "骰子的面数（如 6 代表标准 6 面骰，20 代表 20 面骰）。"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "description": "投掷骰子的次数（如投掷 1 次）。"
+                    }
+                },
+                "required": ["sides", "count"],
+                "additionalProperties": false
+            },
+            "strict": true
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_worldview",
+            "description": "在角色世界观知识库中做语义检索，返回与查询最相关的若干设定片段。当需要角色的背景故事、地理、历史、势力、种族或能力等具体设定时才调用；日常寒暄、闲聊、或不需要设定依据就能回答的内容不要调用。查询用自然语言描述想知道的内容即可，不必逐字匹配原文。可针对不同方面多次调用。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query_string": {
+                        "type": "string",
+                        "description": "用自然语言描述要查询的内容。"
+                    }
+                },
+                "required": ["query_string"],
+                "additionalProperties": false
+            },
+            "strict": true
+        }
+    }
+]
