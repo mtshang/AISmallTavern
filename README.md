@@ -229,6 +229,8 @@ aismalltavern/
 ├── file_operate.py               # JSON 和文本文件的原子写入
 ├── download_embedding_model.py   # 嵌入模型一键下载（多镜像回退、体积校验）
 ├── 下载向量化模型.bat             # 下载脚本的双击入口
+├── hooks/
+│   └── hook-torch.py             # PyInstaller hook 覆盖：规避 torch 子模块枚举崩溃
 ├── requirements.txt
 ├── .env.example                  # 配置示例
 ├── .env模板.txt
