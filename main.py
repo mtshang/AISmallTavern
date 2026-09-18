@@ -27,6 +27,59 @@ from app_context import AppContext, resolve_character_dir
 import rag
 
 
+def download_embedding_model(target_dir: Path) -> None:
+    """
+    把 granite-embedding-r2 下载到指定目录（供打包版 exe 使用）。
+
+    源码运行时使用 download_embedding_model.py 脚本即可；
+    打包版没有 .venv，脚本跑不起来，而 exe 自带 huggingface_hub，
+    因此把最核心的下载逻辑放在这里，供 frozen 场景调用。
+
+    下载源按顺序尝试：hf-mirror 镜像 → HuggingFace 官方。
+    只取运行所需的文件（json / safetensors / md / LICENSE），
+    跳过仓库里 onnx / openvino 等约 3.4 GB 的冗余格式。
+    """
+    #/ 延迟导入：正常启动与源码运行完全不会付出这份导入成本。
+    from huggingface_hub import snapshot_download
+
+    repo_id = "ibm-granite/granite-embedding-311m-multilingual-r2"
+    mirrors = (
+        ("hf-mirror 镜像", "https://hf-mirror.com"),
+        ("HuggingFace 官方", None),
+    )
+    allow_patterns = ["*.json", "*.safetensors", "*.md", "LICENSE"]
+    required = ("model.safetensors", "tokenizer.json", "config.json")
+
+    #/ 已有主权重文件时直接跳过，避免每次启动都发起网络请求。
+    if (target_dir / "model.safetensors").is_file():
+        return
+
+    last_error: Exception | None = None
+    for label, endpoint in mirrors:
+        try:
+            print(f"下载源：{label}")
+            snapshot_download(
+                repo_id=repo_id,
+                local_dir=str(target_dir),
+                allow_patterns=allow_patterns,
+                endpoint=endpoint,
+            )
+
+            missing = [name for name in required if not (target_dir / name).is_file()]
+            if not missing:
+                print("向量化模型下载完成。")
+                return
+
+            print(f"下载不完整，缺少：{missing}，换下一个下载源重试。")
+        except Exception as error:
+            print(f"[提示] {label}下载失败：{type(error).__name__}：{error}")
+            last_error = error
+
+    raise SystemExit(
+        f"所有下载源均失败（{last_error}）。"
+        "请检查网络后重新运行，或手动下载模型放入 granite-embedding-r2/ 目录。"
+    )
+
 
 def main() -> None:
     """
@@ -54,6 +107,15 @@ def main() -> None:
         #/ 大写名称 BASE_DIR 是“模块常量”的命名约定；Python 并不会禁止后续重新赋值。
         BASE_DIR = Path(__file__).resolve().parent
     EMBEDDING_MODEL_DIR:Path=BASE_DIR / "granite-embedding-r2"
+
+    #/ 打包成 exe 后没有 .venv，发行包里的下载脚本无法运行；
+    #/ exe 自带 huggingface_hub，可以自己完成下载。
+    #/ 模型已存在时条件不成立，不会发起任何网络请求；
+    #/ 源码运行时本分支永远不触发，仍走下载脚本。
+    if getattr(sys, "frozen", False) and not (EMBEDDING_MODEL_DIR / "model.safetensors").is_file():
+        print("正在下载向量化模型...（约 630 MB，首次运行需要下载一次）")
+        download_embedding_model(EMBEDDING_MODEL_DIR)
+
     CONFIG_PATH:Path =BASE_DIR / "user_data" / "config.json"
     DEFAULT_CONFIG_PATH:Path =BASE_DIR / "assets" / "default"/"default_config.json"
     CONFIG:dict[str, Any]
@@ -247,5 +309,5 @@ def main() -> None:
 
 
 
-if __name__ == "__main__":
+if __name__ == "__&#8203;main__":
     main()
