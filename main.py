@@ -67,6 +67,21 @@ def download_embedding_model(target_dir: Path) -> None:
 
             missing = [name for name in required if not (target_dir / name).is_file()]
             if not missing:
+                #/ 与 download_embedding_model.py 保持一致：
+                #/ 把许可证文本一并放进模型目录（获取失败不阻断流程）。
+                import urllib.request
+                license_path = target_dir / "LICENSE"
+                if not license_path.is_file():
+                    try:
+                        with urllib.request.urlopen(
+                            "https://www.apache.org/licenses/LICENSE-2.0.txt", timeout=30
+                        ) as response:
+                            license_text = response.read().decode("utf-8")
+                        if "Apache License" in license_text:
+                            license_path.write_text(license_text, encoding="utf-8")
+                    except Exception:
+                        pass
+
                 print("向量化模型下载完成。")
                 return
 
@@ -273,7 +288,11 @@ def main() -> None:
     try:
         asyncio.run(rag.preload_worldview_embedding_model(appcontext.embedding_model_dir))
     except Exception as error:
+        #/ transformers 的懒加载会把真实 ImportError 包装成一句泛泛的提示，
+        #/ 打印完整 traceback 才能看到真正缺失的模块。
+        import traceback
         print(f"\n[错误] 向量化模型加载失败：{error}")
+        print(traceback.format_exc())
         print("\n若是模型缺失，请先运行 \"下载向量化模型.bat\" 或者 \"download_embedding_model.py\"")
         raise SystemExit(1) from error
 
@@ -309,5 +328,5 @@ def main() -> None:
 
 
 
-if __name__ == "__&#8203;main__":
+if __name__ == "__main__":
     main()

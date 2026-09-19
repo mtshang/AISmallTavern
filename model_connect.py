@@ -44,6 +44,11 @@ async def chat_with_model(appcontext:AppContext,messages:list[dict],tools:list[d
 
     model = appcontext.llm_model
     client = appcontext.llm_client
+    if client is None:
+        #/ 凭证缺失时客户端未创建；走到这里说明用户在配置错误的状态下发了消息。
+        raise RuntimeError(
+            "模型客户端不可用：请在 .env 中填写 LLM_API_KEY / LLM_BASE_URL / LLM_MODEL 后重启。"
+        )
     request_messages=messages
 
     #/ 不再用 async with：客户端的生命周期由 tavern_loop 统一管理。

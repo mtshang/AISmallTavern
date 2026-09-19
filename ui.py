@@ -94,14 +94,14 @@ async def tavern_loop(appcontext:AppContext) -> str:
     #/ state 是 tavern_loop 的局部变量；下面许多嵌套函数会通过闭包访问这个对象。
     state = UIState()
 
-
-    #/ 整个应用共用一个客户端：连接池与 TLS 会话跨请求复用。
-    appcontext.llm_client = AsyncOpenAI(
-        api_key=appcontext.llm_api_key,
-        base_url=appcontext.llm_base_url,
-        max_retries=2,
-        timeout=20.0,
-    )
+    if not appcontext.config_env_error:
+        #/ 整个应用共用一个客户端：连接池与 TLS 会话跨请求复用。
+        appcontext.llm_client = AsyncOpenAI(
+            api_key=appcontext.llm_api_key,
+            base_url=appcontext.llm_base_url,
+            max_retries=2,
+            timeout=20.0,
+        )
 
 
     async def animate_status(waiting_message: str) -> None:
@@ -128,8 +128,8 @@ async def tavern_loop(appcontext:AppContext) -> str:
             app.invalidate()
 
 
-    credential_status = f"已配置（***{appcontext.llm_api_key[-3:]}）" if appcontext.llm_api_key else "未配置"
-    endpoint_status = f"已配置（***{appcontext.llm_base_url.split('://')[-1]}）" if appcontext.llm_base_url else "未配置"
+    credential_status = f"已配置（***{appcontext.llm_api_key[-3:]}）" if appcontext.llm_api_key else "未配置，请在 .env 中配置后重启程序！"
+    endpoint_status = f"已配置（***{appcontext.llm_base_url.split('://')[-1]}）" if appcontext.llm_base_url else "未配置，请在 .env 中配置后重启程序！"
     #/文本显示流程
     #/ Application（app）
     #/ └── Layout（layout）
@@ -584,7 +584,7 @@ async def tavern_loop(appcontext:AppContext) -> str:
         full_tool_calls_list:list[dict] = []
         try:
             if appcontext.config_env_error:
-                append_output("缺少环境变量，或仍为模板占位符，请在 .env 中写入真实的配置值！")
+                append_output("缺少环境变量，或仍为模板占位符，请在 .env 中写入真实的配置值！然后重启程序。")
                 append_output("\n")
             else:
                 need_tool_calls:bool=True
@@ -1134,23 +1134,6 @@ async def tavern_loop(appcontext:AppContext) -> str:
     )
 
 
-    load_status_task = app.create_background_task(
-        animate_status("正在加载向量模型")
-    )
-    async def preload_then_clear() -> None:
-        """后台完成预加载；结束时停掉状态栏动画并清理。"""
-        try:
-            await rag.preload_worldview_embedding_model(
-                appcontext.embedding_model_dir
-            )
-        finally:
-            load_status_task.cancel()
-            with contextlib.suppress(asyncio.CancelledError):
-                await load_status_task
-
-    #/ 预加载与状态栏动画并发进行：
-    #/ run_async() 启动渲染器之后，动画的每一帧才会真正绘制出来。
-    app.create_background_task(preload_then_clear())
 
 
     #/ `await` 会暂停 tavern_loop 本身，等待 app.run_async() 结束

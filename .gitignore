@@ -21,3 +21,4 @@ assets/default/*/title_to_content.json
 user_data/characters/*/metadata.json
 user_data/characters/*/rag.faiss
 user_data/characters/*/title_to_content.json
+__check_artifacts.py
