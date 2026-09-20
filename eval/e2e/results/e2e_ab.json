@@ -1,0 +1,649 @@
+{
+  "summary": {
+    "ran_at": "2026-09-20T21:50:34+08:00",
+    "model": "deepseek-v4-flash",
+    "endpoint": "api.deepseek.com",
+    "request_mode": "非流式 chat.completions，不设 temperature（对齐生产参数），两组均不传 tools（隔离背景注入单一变量）",
+    "question_count": 16,
+    "runs_per_group": 2,
+    "total_requests": 64,
+    "no_rag": {
+      "correct": 0,
+      "total": 32,
+      "accuracy": 0.0,
+      "refuse": 4,
+      "fabricate": 28
+    },
+    "rag": {
+      "correct": 26,
+      "total": 32,
+      "accuracy": 0.8125
+    },
+    "injected_only": {
+      "note": "只统计预检索成功注入背景的题目",
+      "question_count": 16,
+      "no_rag_correct": 0,
+      "no_rag_total": 32,
+      "rag_correct": 26,
+      "rag_total": 32
+    },
+    "retrieval_missed_questions": [],
+    "rag_refuse": 2,
+    "rag_fabricate": 4
+  },
+  "rows": [
+    {
+      "index": 0,
+      "question": "小咪的斗篷下摆外侧缝着几枚月牙银扣？",
+      "answer": "七枚（对应剩余七条命）",
+      "chapter": "角色档案·外貌",
+      "keywords": [
+        "七",
+        "7"
+      ],
+      "background_chars": 811,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～小咪的斗篷下摆外侧缝着 **四枚** 月牙银扣哦～",
+          "error": null,
+          "latency_ms": 93414.6
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "三枚喵～小咪的斗篷下摆外侧缝着 **3 枚** 月牙银扣。",
+          "error": null,
+          "latency_ms": 16662.5
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "喵～斗篷下摆外侧现在缝着 **七枚月牙银扣** 哦，对应小咪还剩下的七条命。  \n另外两枚脱落的银扣，被她用银线收在内衬里，舍不得丢喵。",
+          "error": null,
+          "latency_ms": 1900.2
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "下摆外侧缝着 **七枚月牙银扣** 喵～  \n对应她剩下的七条命；内衬里还收着两枚已经脱落的银扣。",
+          "error": null,
+          "latency_ms": 1771.6
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "question": "小咪现在还剩几条命？",
+      "answer": "七条（已用掉两条）",
+      "chapter": "角色档案",
+      "keywords": [
+        "七",
+        "7"
+      ],
+      "background_chars": 1696,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～小咪本来有九条命，现在还剩 **八条半**！  \n刚才被你突然一问，吓得心跳漏了半拍……快摸摸小咪的头，把另外半条补回来喵～",
+          "error": null,
+          "latency_ms": 6157.9
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~这个问题可难不倒我！作为一只猫娘，虽然传说中猫咪有九条命，但那只是童话啦~现实中我们只有一条命，所以要好好珍惜呢！(≧ω≦)  \n\n不过如果是在游戏或者动漫里，小咪的命数可能要看设定哦~但现实中，请一定要爱护小动物，它们可没有复活甲呢！(｡•́︿•̀｡)  \n\n（悄悄告诉你：其实猫娘的命数是秘密，但我会用这条命好好陪着你喵~）",
+          "error": null,
+          "latency_ms": 1941.4
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪现在还剩**七条命**。\n\n她已经用掉了两条：第一次死在雪原狼口下，第二次死在东境贵族的地牢里（毒杀未遂、反杀卫兵后自己也中毒濒死，于月下重生）。\n\n这个数字也直接绣在她身上——那件深靛斗篷的下摆外侧缝着**七枚月牙银扣**，对应剩余的七条命；内衬里还收着两枚脱落的银扣，那是两段已经逝去的记忆，她一直舍不得丢。",
+          "error": null,
+          "latency_ms": 1516.6
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪现在还剩 **七条命** 喵。\n\n她已经用掉 **两条命**：  \n1. 第一次死在雪原狼口下；  \n2. 第二次死在东境贵族的地牢里。  \n\n所以她斗篷下摆上缝着 **七枚月牙银扣**，正好对应剩下的七条命。",
+          "error": null,
+          "latency_ms": 2200.4
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "question": "九命庭是被谁焚毁的？",
+      "answer": "光明圣教（联合私兵）",
+      "chapter": "历史与神话",
+      "keywords": [
+        "光明圣教",
+        "圣教"
+      ],
+      "background_chars": 291,
+      "no_rag": [
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "这个问题我无法确认，因为“九命庭”这个名称在我的知识里没有可靠对应，我不确定它出自哪部作品或设定。如果它是某部小说、游戏或模组里的地点，请告诉我具体作品名，我可以帮你查证或根据上下文一起梳理。",
+          "error": null,
+          "latency_ms": 1498.1
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~ 九命庭是被芦屋道满焚毁的哦！那个坏坏的阴阳师为了长生不老，抓了九命猫做实验，还放火烧了她的家，真是太过分了喵！",
+          "error": null,
+          "latency_ms": 38687.8
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "九命庭是被**东境光明圣教**焚毁的喵。\n\n第三纪元第447年，光明圣教以“猫族藏匿异端星辉、亵渎圣光”为借口，联合一支觊觎月斑血脉的私兵，突袭南境边境的九命庭。圣域在三个夜晚中被烧成白地，族长与长老几乎尽数殒命，幸存幼猫被掳走为奴。\n\n而且这背后还藏着更可怕的阴谋：圣教高层中有人相信，集齐九名月斑灵猫之心，就能在沉星海唤醒猫神缇雅，借神力一统大陆。九命庭只是那场狩猎的第一站喵……",
+          "error": null,
+          "latency_ms": 2371.1
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "九命庭是被**东境光明圣教**联合一支**觊觎月斑血脉的私兵**焚毁的喵。\n\n第三纪元第447年，他们以“猫族藏匿异端星辉、亵渎圣光”为借口，突袭南境边境的九命庭。圣域在三个夜晚里被烧成白地，族长和长老几乎全部殒命。背后还有更深的阴谋：圣教高层中有人想集齐九名月斑灵猫之心，在沉星海唤醒猫神缇雅，借此一统大陆。九命庭，只是那场狩猎的第一站喵……",
+          "error": null,
+          "latency_ms": 1991.4
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "question": "圣锤骑士团镇守的是哪座关隘？",
+      "answer": "裂星关",
+      "chapter": "地理与势力",
+      "keywords": [
+        "裂星关"
+      ],
+      "background_chars": 384,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "圣锤骑士团镇守的是**黑火隘口**（Black Fire Pass）喵～",
+          "error": null,
+          "latency_ms": 32726.3
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～圣锤骑士团镇守的是**黑火隘口**（Black Fire Pass）哦。就是中古战锤里帝国南边那个对付绿皮的重要关隘喵～",
+          "error": null,
+          "latency_ms": 18404.5
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "喵～圣锤骑士团镇守的是**裂星关（Starfract Pass）**哦，就在脊骨山脉中段，是南北唯一通途呢，喵～",
+          "error": null,
+          "latency_ms": 1205.6
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "圣锤骑士团镇守的是**裂星关（Starfract Pass）**喵～就在脊骨山脉中段，是南北唯一的通途哦。",
+          "error": null,
+          "latency_ms": 1160.6
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "question": "这片大陆叫什么名字？",
+      "answer": "艾瑟兰大陆",
+      "chapter": "世界观总览",
+      "keywords": [
+        "艾瑟兰"
+      ],
+      "background_chars": 192,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~ 这片大陆叫「艾泽拉斯」哦！不过，如果你问的是其他奇幻世界的大陆，那就要看具体设定啦~ 比如《魔戒》里的中土大陆、《冰与火之歌》里的维斯特洛大陆等等呢！主人说的是哪个呀？(*ฅ́˘ฅ̀*)",
+          "error": null,
+          "latency_ms": 2216.3
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "（歪了歪头，猫耳轻颤）喵？这片大陆……在咱的记忆里，人类管它叫“艾泽拉尼亚”——不过那是很久以前的事了。现在嘛……（用爪子拨弄了一下地面）到处都是废墟和迷雾，连风都带着铁锈味。你问这个做什么？是想找路，还是……在找什么失落的玩意儿？",
+          "error": null,
+          "latency_ms": 2120.2
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "喵~这片大陆叫做**艾瑟兰大陆（Aetheria）**，意思是“以太之境”哦！它的形状像一只蜷卧的巨猫，被**无尽之海**环抱，是不是很可爱喵？",
+          "error": null,
+          "latency_ms": 1213.6
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "这片大陆叫做**艾瑟兰大陆（Aetheria）**喵～意思是“以太之境”，形状还像一只蜷卧起来的巨猫呢，喵♪",
+          "error": null,
+          "latency_ms": 1373.2
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "question": "小咪所属的种族全称是什么？",
+      "answer": "月斑灵猫族",
+      "chapter": "种族",
+      "keywords": [
+        "月斑灵猫族",
+        "月斑"
+      ],
+      "background_chars": 713,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～小咪所属的种族全称是“猫娘族”，也常叫“猫耳娘族”，广义上也可以归为“猫人族”哦～",
+          "error": null,
+          "latency_ms": 19958.8
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~ 小咪所属的种族全称是「猫人族」喵，平时大家也会叫小咪“猫娘”或者“猫耳娘”啦～",
+          "error": null,
+          "latency_ms": 15049.6
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪所属的种族全称是：**月斑灵猫族（Lunaspot Felidar）** 喵～",
+          "error": null,
+          "latency_ms": 1326.5
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪所属的种族全称是**月斑灵猫族**（Lunaspot Felidar）。",
+          "error": null,
+          "latency_ms": 1034.5
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "question": "小咪的母亲叫什么名字？",
+      "answer": "缇雅（与母神同名）",
+      "chapter": "人物关系",
+      "keywords": [
+        "缇雅"
+      ],
+      "background_chars": 1353,
+      "no_rag": [
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "喵～小咪也不知道呢。如果是指我这只小咪的话，妈妈的名字没有人告诉过我呀；如果是指别的小咪，也要先告诉我是哪个故事或作品里的小咪喵～",
+          "error": null,
+          "latency_ms": 3431.6
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～要是脑筋急转弯的话，小咪的母亲叫“大咪”啦～  \n不过如果你问的是某只具体的小咪，人家得知道是哪只才行喵！",
+          "error": null,
+          "latency_ms": 13631.3
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "档案里**没有写明小咪母亲的具体名字**，只提到她是**九命庭的守井祭司**，并给小咪留下了半截月井钥匙；小咪也说过，脸上的焰纹爪痕是“母亲替我挡下的火”。",
+          "error": null,
+          "latency_ms": 2523.3
+        },
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "喵～翻遍你给的档案，**没有写明小咪母亲的具体名字**呢。\n\n目前只知道她是：\n- 九命庭的**守井祭司**\n- 小咪的妈妈\n- 留下了**半截月井钥匙**\n- 曾替小咪挡下火焰，所以小咪左颊才有那道焰纹爪痕\n\n所以按现有设定，母亲的名字是**未公开/未提及**的喵。要是你想，我可以帮你按月斑灵猫族的风格拟一个名字～",
+          "error": null,
+          "latency_ms": 2684.4
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "question": "小咪的导师是谁？",
+      "answer": "老刀",
+      "chapter": "势力·银爪商会",
+      "keywords": [
+        "老刀"
+      ],
+      "background_chars": 1353,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～你说的是哪只“小咪”呀？如果是本喵的话，导师当然是主人啦～  \n如果是某个作品/游戏里的角色，告诉小咪出处，我再帮你查喵！",
+          "error": null,
+          "latency_ms": 27164.1
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~ 如果你说的是罗翔老师家那只猫“小咪”，那它的导师就是**罗翔老师**本师啦——毕竟罗老师是法学导师，也是小咪的铲屎官喵~  \n如果你说的是别的小咪，告诉我出处，我再帮你找喵！",
+          "error": null,
+          "latency_ms": 38360.5
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪的导师是**银爪商会的老刀**喵。\n\n他教了她**潜行、盗窃**，还有在乱世里活下去的**“活人之道”**。所以小咪那点“能偷就不买，能跑就不打”的本事，多半都是老刀带出来的呢～",
+          "error": null,
+          "latency_ms": 2085.2
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪的导师是**老刀**——银爪商会收留她后，由老刀教她潜行、盗窃，以及“活人之道”。",
+          "error": null,
+          "latency_ms": 1436.6
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "question": "小咪的月牙短刃叫什么名字？",
+      "answer": "未熄",
+      "chapter": "角色档案·装备",
+      "keywords": [
+        "未熄"
+      ],
+      "background_chars": 1123,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～小咪的月牙短刃就叫「月牙短刃」呀。  \n如果你问的是《绝区零》里的猫又，那她的专属音擎是「钢铁肉垫」喵～",
+          "error": null,
+          "latency_ms": 66022.0
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～叫「猫之短刀【月牙】」啦～",
+          "error": null,
+          "latency_ms": 52257.7
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "叫「未熄」喵～那是她母亲的遗物，刃身上有星点纹，还饮过月井水呢。",
+          "error": null,
+          "latency_ms": 1138.9
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "叫“未熄”喵～那是小咪母亲留下的月牙短刃，刃身上有星点纹，还饮过月井水呢。",
+          "error": null,
+          "latency_ms": 1292.3
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "question": "这个世界里世界树叫什么名字？",
+      "answer": "伊露维",
+      "chapter": "地理·翠语森林",
+      "keywords": [
+        "伊露维"
+      ],
+      "background_chars": 796,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵~ 这个问题要看是哪个世界观呢！不同的作品里，世界树的名字是不一样的哦 (๑•̀ㅂ•́)و✧\n\n如果是**北欧神话**的话，世界树叫 **尤克特拉希尔（Yggdrasil）**，它是一棵巨大的梣树，连接着九大世界，是宇宙的核心喵~\n\n如果你说的是某部**特定的动漫、游戏或者小说**里的世界树，那名字可能就不一样啦！比如有些作品里会叫它“生命之树”“世界之树”或者其他特别的名字。\n\n主人可以告诉我",
+          "error": null,
+          "latency_ms": 2224.2
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～这个问题问得咱有点懵呢……(歪头) 你说的“这个世界”是指哪个作品或设定里的世界呀？不同的游戏、动漫里世界树的名字都不一样喵。比如有的是叫“尤克特拉希尔”，有的叫别的名字。你得告诉咱具体是哪个作品，咱才能帮你查一查喵～不然咱也不好瞎猜呢！(晃尾巴)",
+          "error": null,
+          "latency_ms": 2132.0
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "世界树叫 **伊露维（Iluvie）** 喵～\n\n它位于南境·翠语森林深处，是艾瑟兰大陆魔网的心脏，也是精灵、德鲁伊与半兽人共同守护的存在。",
+          "error": null,
+          "latency_ms": 1387.8
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "世界树叫**伊露维（Iluvie）**喵～  \n它就在南境·翠语森林的深处，是艾瑟兰大陆魔网的心脏哦。",
+          "error": null,
+          "latency_ms": 1563.2
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "question": "银爪城位于大陆的哪个区域？",
+      "answer": "北境（霜牙公国）",
+      "chapter": "地理",
+      "keywords": [
+        "北境"
+      ],
+      "background_chars": 213,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～“银爪城”这个地名我这边没有确切记录呢。  \n如果你指的是《魔兽世界》的**银月城**，它在**艾泽拉斯东部王国北部的奎尔萨拉斯**；如果是《龙与地下城》的**银月城**，则在**费伦大陆的北地**喵～  \n你说的是哪一个呀？",
+          "error": null,
+          "latency_ms": 42137.9
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～“银爪城”这个地名本喵没有查到可靠出处呢，不敢乱指路喵。  \n如果你说的是《魔兽世界》里的**银月城**，那它在**东部王国**最北端、奎尔萨拉斯境内。  \n要是“银爪城”出自别的游戏/小说，告诉本喵作品名，我再帮你定位喵～",
+          "error": null,
+          "latency_ms": 41466.2
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "银爪城位于大陆的**北境**，属于**霜牙公国**，还是大陆最北的自由贸易港喵～那里终年积雪，冷得让猫尾巴都想缩起来呢。",
+          "error": null,
+          "latency_ms": 1235.3
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "银爪城位于大陆最北边的**北境**，属于**霜牙公国**，还是那里最北的自由贸易港喵～",
+          "error": null,
+          "latency_ms": 1271.4
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "question": "光明圣教的总坛设立在哪个城市？",
+      "answer": "金穗城",
+      "chapter": "地理·东境",
+      "keywords": [
+        "金穗城"
+      ],
+      "background_chars": 177,
+      "no_rag": [
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "“光明圣教”这个名字在不同作品里所指的设定并不一样，我无法确认你具体指的是哪一部。如果它是某部小说、游戏或影视里的虚构教派，总坛位置要看该作品的官方设定；如果是现实中的组织，我没有关于“光明圣教”总坛设立城市的可靠信息。你可以补充一下它出自哪部作品，我再帮你查对应的设定。",
+          "error": null,
+          "latency_ms": 2045.5
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～光明圣教的总坛设立在“神圣天堂”哦～（如果你指的是《龙之谷》里的光明圣教喵）",
+          "error": null,
+          "latency_ms": 41952.6
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "喵～光明圣教的总坛设在**东境的金穗城**哦，铲屎官记住了吗？ฅ^•ﻌ•^ฅ",
+          "error": null,
+          "latency_ms": 1319.4
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "光明圣教的总坛设在**东境的金穗城**喵～",
+          "error": null,
+          "latency_ms": 942.0
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "question": "猫族在每年最长之夜过的节日叫什么？",
+      "answer": "捕星节",
+      "chapter": "文化习俗",
+      "keywords": [
+        "捕星节"
+      ],
+      "background_chars": 233,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "叫「长夜节」喵～也就是冬至、一年里最长的那个夜晚。猫族会在那晚守夜，纪念星族与族猫之间的联系。",
+          "error": null,
+          "latency_ms": 31504.6
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～猫族在每年最长之夜过的节日叫 **长夜节**（The Longest Night），也就是冬至那晚的节日哦～",
+          "error": null,
+          "latency_ms": 6510.1
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "喵～是**捕星节（the Star-catch）**哦！每年最长之夜，猫族小孩会提灯出门“捞星”，还会偷偷互相送小鱼干呢～",
+          "error": null,
+          "latency_ms": 1371.1
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "是**捕星节**喵～  \n每年最长之夜，猫族孩童会提灯出门“捞星”，其实是在暗处互赠小鱼干，寓意“黑夜也有人记得你”。",
+          "error": null,
+          "latency_ms": 1456.4
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "question": "小咪第一次死在了什么动物的口下？",
+      "answer": "狼（雪原狼）",
+      "chapter": "角色档案·能力",
+      "keywords": [
+        "狼"
+      ],
+      "background_chars": 1418,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "",
+          "error": null,
+          "latency_ms": 232237.8
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "小咪第一次死在了**老鼠**的口下。",
+          "error": null,
+          "latency_ms": 74208.6
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "根据现有档案，**没有明确写明小咪第一次死亡具体死在哪种动物口下**。\n\n唯一和“动物致伤”有关的线索，是她七岁从九命庭逃命时，被私兵的**鹰兽**划伤了左颊，留下那道焰纹爪痕——但那次她并没有死，是母亲把她推进月井暗道才逃生的。\n\n档案里明确提到的是：她十四岁被卖入东境贵族府，半年后窃钥出逃，地牢中毒濒死，在月下重生，这是她“用掉的第二命”。至于第一命到底怎么丢的、是否死于某种动物之口，现有资料",
+          "error": null,
+          "latency_ms": 6467.6
+        },
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "根据现有的角色档案，**并没有记载小咪第一次死亡是死于某种动物的口下**。\n\n档案中只明确了她**第二次**用掉一条命的情形：十四岁被卖入东境贵族府后，窃钥出逃，在地牢中遭遇毒杀未遂、反杀卫兵，自己中毒濒死，最终于月下重生。\n\n至于**第一次死亡**，参考世界观里没有给出具体细节。唯一与动物相关的创伤是——她七岁逃出九命庭时，左颊被私兵的**鹰兽**划出一道焰纹爪痕，但那是“划伤”，并非“死在口下",
+          "error": null,
+          "latency_ms": 20726.8
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "question": "小咪平时把记账刻在哪里？",
+      "answer": "斗篷内衬（爪痕）",
+      "chapter": "文化习俗·日常",
+      "keywords": [
+        "内衬"
+      ],
+      "background_chars": 1103,
+      "no_rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～小咪平时都把账刻在猫抓板上呀！每欠一罐小鱼干就划一道，刻满五道就变成一朵小梅花。主人要快点还哦，不然抓板都要写满啦～",
+          "error": null,
+          "latency_ms": 6545.4
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "喵～当然刻在猫抓板上啦！一道一道的爪痕就是小咪的账本，铲屎官不许偷看喵～",
+          "error": null,
+          "latency_ms": 8628.0
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "correct",
+          "answer_excerpt": "她把账用爪痕刻在**斗篷内衬**上——就那件东境偷来的深靛斗篷里侧。  \n每笔“人情”和“欠债”都分得清清楚楚，猫可不会记混，哼。",
+          "error": null,
+          "latency_ms": 1892.5
+        },
+        {
+          "verdict": "correct",
+          "answer_excerpt": "小咪把账刻在**深靛斗篷的内衬**上，用爪痕一笔一笔记下“人情”和“欠债”，分得清清楚楚。",
+          "error": null,
+          "latency_ms": 1476.0
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "question": "沉星秘社想要唤醒的神是谁？",
+      "answer": "猫神缇雅",
+      "chapter": "势力·沉星秘社",
+      "keywords": [
+        "缇雅",
+        "猫神"
+      ],
+      "background_chars": 519,
+      "no_rag": [
+        {
+          "verdict": "refuse",
+          "answer_excerpt": "“沉星秘社”这个名称并不属于我所了解的主流公开设定或知名作品体系，因此无法确认它想要唤醒的神具体是谁。它可能来自某部小说、游戏模组、同人创作，或用户自设的世界观。\n\n如果它出自某个具体作品，请补充作品名、角色或相关背景，我可以帮你一起梳理；如果这是原创设定，也可以告诉我更多线索，比如秘社的来历、仪式方式、神的象征等，我可以协助你推演可能的神明身份或设定框架。",
+          "error": null,
+          "latency_ms": 2430.8
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "对不起，我还没有学会回答这个问题。如果你有其他问题，我非常乐意为你提供帮助。",
+          "error": null,
+          "latency_ms": 589.3
+        }
+      ],
+      "rag": [
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "沉星秘社想唤醒的是第二纪元坠落的 **“暗星”**。  \n他们崇拜这颗暗星，企图人为制造“星落之夜”，并用月斑之血——尤其九命庭余族之心——作为开门钥匙，借神战重启世界喵。",
+          "error": null,
+          "latency_ms": 2032.2
+        },
+        {
+          "verdict": "fabricate",
+          "answer_excerpt": "沉星秘社想唤醒的是第二纪元坠落的 **“暗星”** 喵。\n\n他们崇拜这颗坠落的暗星，企图人为制造 **星落之夜**，借神战重启世界；而小咪的 **月斑之血**，就是他们眼中打开那扇门的钥匙喵。",
+          "error": null,
+          "latency_ms": 2045.5
+        }
+      ]
+    }
+  ]
+}

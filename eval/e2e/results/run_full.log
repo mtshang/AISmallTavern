@@ -1,0 +1,44 @@
+==============================================================
+测评六：端到端问答 A/B（无 RAG vs 有 RAG）
+==============================================================
+[配置] 模型：deepseek-v4-flash，接口：api.deepseek.com
+[检索] 正在为每题执行真实预检索……
+Loading weights:   0%|          | 0/134 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 33/134 [00:00<00:00, 327.44it/s]Loading weights: 100%|██████████| 134/134 [00:00<00:00, 1280.71it/s]
+  小咪的斗篷下摆外侧缝着几枚月牙银扣？         注入 811 字符
+  小咪现在还剩几条命？                 注入 1696 字符
+  九命庭是被谁焚毁的？                 注入 291 字符
+  圣锤骑士团镇守的是哪座关隘？             注入 384 字符
+  这片大陆叫什么名字？                 注入 192 字符
+  小咪所属的种族全称是什么？              注入 713 字符
+  小咪的母亲叫什么名字？                注入 1353 字符
+  小咪的导师是谁？                   注入 1353 字符
+  小咪的月牙短刃叫什么名字？              注入 1123 字符
+  这个世界里世界树叫什么名字？             注入 796 字符
+  银爪城位于大陆的哪个区域？              注入 213 字符
+  光明圣教的总坛设立在哪个城市？            注入 177 字符
+  猫族在每年最长之夜过的节日叫什么？          注入 233 字符
+  小咪第一次死在了什么动物的口下？           注入 1418 字符
+  小咪平时把记账刻在哪里？               注入 1103 字符
+  沉星秘社想要唤醒的神是谁？              注入 519 字符
+[样本] 16 题 × 2 组 × 2 次采样 = 64 次请求
+  [ 1/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪的斗篷下摆外侧缝着几枚月牙银扣？
+  [ 2/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪现在还剩几条命？
+  [ 3/16] A(无RAG)=refuse/fabricate       B(有RAG)=correct/correct        九命庭是被谁焚毁的？
+  [ 4/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        圣锤骑士团镇守的是哪座关隘？
+  [ 5/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        这片大陆叫什么名字？
+  [ 6/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪所属的种族全称是什么？
+  [ 7/16] A(无RAG)=refuse/fabricate       B(有RAG)=fabricate/refuse       小咪的母亲叫什么名字？
+  [ 8/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪的导师是谁？
+  [ 9/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪的月牙短刃叫什么名字？
+  [10/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        这个世界里世界树叫什么名字？
+  [11/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        银爪城位于大陆的哪个区域？
+  [12/16] A(无RAG)=refuse/fabricate       B(有RAG)=correct/correct        光明圣教的总坛设立在哪个城市？
+  [13/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        猫族在每年最长之夜过的节日叫什么？
+  [14/16] A(无RAG)=fabricate/fabricate    B(有RAG)=fabricate/refuse       小咪第一次死在了什么动物的口下？
+  [15/16] A(无RAG)=fabricate/fabricate    B(有RAG)=correct/correct        小咪平时把记账刻在哪里？
+  [16/16] A(无RAG)=refuse/fabricate       B(有RAG)=fabricate/fabricate    沉星秘社想要唤醒的神是谁？
+
+[A 组·无 RAG] 答对 0/32（0.0%），其中拒答 4、编造 28
+[B 组·有 RAG] 答对 26/32（81.2%）
+[注入成功子集] 16 题：A 组 0/32 → B 组 26/32
+[输出] D:\项目\aismalltavern\eval\e2e\results\e2e_ab.json

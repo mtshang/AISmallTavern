@@ -1,0 +1,197 @@
+{
+  "ran_at": "2026-09-20T22:49:37+08:00",
+  "technique": "ast 抽取 ui.py 中 stream_ai_reply 真实源码，exec 到受控命名空间（假模型/假路由/假输出），不修改程序文件、不启动终端界面（TUI）、零网络请求",
+  "cases": [
+    {
+      "case": "happy_path（单工具全流程）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "模型恰好请求 2 次（工具轮 + 收尾轮）",
+          "passed": true,
+          "detail": "实际 2 次"
+        },
+        {
+          "name": "第二次请求的消息序列正确",
+          "passed": true,
+          "detail": "system → user → assistant → tool"
+        },
+        {
+          "name": "分片参数合并为完整 JSON",
+          "passed": true,
+          "detail": "合并结果：'{\"query_string\": \"小咪是哪里出生的？\"}'"
+        },
+        {
+          "name": "工具名从首片正确保留",
+          "passed": true,
+          "detail": "工具名：search_worldview"
+        },
+        {
+          "name": "工具结果以 role=tool 回填",
+          "passed": true,
+          "detail": "content 前 20 字：（模拟）世界观检索结果：测试文本。"
+        },
+        {
+          "name": "工具收到解析后的参数",
+          "passed": true,
+          "detail": "路由记录：[{'name': 'search_worldview', 'kwargs': {'query_string': '小咪是哪里出生的？'}}]"
+        },
+        {
+          "name": "会话最终为 system+user+assistant(工具)+tool+assistant(回答)",
+          "passed": true,
+          "detail": "system → user → assistant → tool → assistant"
+        },
+        {
+          "name": "最终回答渲染到输出区",
+          "passed": true,
+          "detail": "输出区长度 24 字符"
+        }
+      ]
+    },
+    {
+      "case": "multi_tool_merge（多工具分片归并）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "两个工具调用都进入 assistant 消息",
+          "passed": true,
+          "detail": "数量：2"
+        },
+        {
+          "name": "index 0 的参数跨分片合并正确",
+          "passed": true,
+          "detail": "合并结果：'{\"query_string\": \"小咪的武器是什么？\"}'"
+        },
+        {
+          "name": "index 1 的参数跨分片合并正确",
+          "passed": true,
+          "detail": "合并结果：'{\"sides\": 20, \"count\": 1}'"
+        },
+        {
+          "name": "两个工具都被执行且参数正确",
+          "passed": true,
+          "detail": "执行顺序：['search_worldview', 'roll_dice']"
+        },
+        {
+          "name": "两条工具结果按序回填",
+          "passed": true,
+          "detail": "回填 2 条"
+        }
+      ]
+    },
+    {
+      "case": "content_stream_merge（文本分片合并）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "文本分片合并为完整回复",
+          "passed": true,
+          "detail": "合并结果：喵，今天想聊点什么？"
+        },
+        {
+          "name": "只请求 1 次模型",
+          "passed": true,
+          "detail": "实际 1 次"
+        }
+      ]
+    },
+    {
+      "case": "error_limit_4（错误重试上限）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "模型请求恰好 4 次（错误上限）",
+          "passed": true,
+          "detail": "实际 4 次"
+        },
+        {
+          "name": "输出包含停止提示",
+          "passed": true,
+          "detail": "已停止继续调用工具"
+        },
+        {
+          "name": "工具从未被真正执行",
+          "passed": true,
+          "detail": "执行记录：[]"
+        },
+        {
+          "name": "会话保留 4 轮失败记录（system+user+4×2）",
+          "passed": true,
+          "detail": "assistant×4，tool×4"
+        }
+      ]
+    },
+    {
+      "case": "request_limit_11（请求次数上限）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "模型请求恰好 11 次（请求上限）",
+          "passed": true,
+          "detail": "实际 11 次"
+        },
+        {
+          "name": "输出包含停止提示",
+          "passed": true,
+          "detail": "已停止继续调用工具"
+        },
+        {
+          "name": "工具执行 11 次（全部成功）",
+          "passed": true,
+          "detail": "实际 11 次"
+        },
+        {
+          "name": "会话保留 11 轮完整记录",
+          "passed": true,
+          "detail": "assistant×11，tool×11"
+        }
+      ]
+    },
+    {
+      "case": "empty_response（空响应处理）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "输出包含『模型未返回有效回复』提示",
+          "passed": true,
+          "detail": "已提示"
+        },
+        {
+          "name": "会话只有 system + user，无 assistant",
+          "passed": true,
+          "detail": "system → user"
+        },
+        {
+          "name": "用户消息保留（可重新发起）",
+          "passed": true,
+          "detail": "已保留"
+        }
+      ]
+    },
+    {
+      "case": "model_exception（模型异常兜底）",
+      "passed": true,
+      "checks": [
+        {
+          "name": "输出包含『生成回复失败』兜底提示",
+          "passed": true,
+          "detail": "已提示"
+        },
+        {
+          "name": "异常不追加半截消息（system + user）",
+          "passed": true,
+          "detail": "system → user"
+        },
+        {
+          "name": "工具从未执行",
+          "passed": true,
+          "detail": "未执行"
+        }
+      ]
+    }
+  ],
+  "total_cases": 7,
+  "passed_cases": 7,
+  "total_checks": 29,
+  "passed_checks": 29
+}

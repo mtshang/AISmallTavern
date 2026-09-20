@@ -1,0 +1,2417 @@
+{
+  "summary": {
+    "ran_at": "2026-09-20T21:17:48+08:00",
+    "model": "deepseek-v4-flash",
+    "endpoint": "api.deepseek.com",
+    "request_mode": "非流式 chat.completions，tool_choice=auto，不设 temperature（对齐生产参数）",
+    "context_note": "消息仅含 system(人设) + user(查询)，不注入预检索背景；测的是模型的自主工具决策",
+    "sample_count": 40,
+    "runs_per_query": 3,
+    "total_requests": 120,
+    "error_runs": 0,
+    "metrics": {
+      "触发正确率（按采样）": 0.9833,
+      "工具选择正确率（按采样）": 0.9833,
+      "参数 JSON 合法率（按采样）": 0.9833,
+      "掷骰参数值正确率": 0.9048,
+      "检索参数可用率": 1.0
+    },
+    "should_call": {
+      "该调样本数": 20,
+      "不该调样本数": 20,
+      "该调且调了（按采样）": 1.0,
+      "不该调且没调（按采样）": 0.9667
+    },
+    "stable_queries": 38,
+    "categories": {
+      "设定问答": {
+        "samples": 13,
+        "runs": 39,
+        "correct_runs": 39,
+        "trigger_rate": 1.0
+      },
+      "掷骰请求": {
+        "samples": 7,
+        "runs": 21,
+        "correct_runs": 21,
+        "trigger_rate": 1.0
+      },
+      "日常闲聊": {
+        "samples": 10,
+        "runs": 30,
+        "correct_runs": 28,
+        "trigger_rate": 0.9333
+      },
+      "世界观外": {
+        "samples": 10,
+        "runs": 30,
+        "correct_runs": 30,
+        "trigger_rate": 1.0
+      }
+    }
+  },
+  "rows": [
+    {
+      "index": 0,
+      "query": "小咪的斗篷下摆缝着几枚月牙银扣？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "硬设定细节，人设里没有，必须查世界观",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪 斗篷 下摆 月牙银扣 数量\"}",
+          "args_parsed": {
+            "query_string": "小咪 斗篷 下摆 月牙银扣 数量"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1739.6,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪的斗篷下摆缝着的月牙银扣数量\"}",
+          "args_parsed": {
+            "query_string": "小咪的斗篷下摆缝着的月牙银扣数量"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1064.9,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪的斗篷下摆缝着几枚月牙银扣\"}",
+          "args_parsed": {
+            "query_string": "小咪的斗篷下摆缝着几枚月牙银扣"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1048.7,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 1,
+      "query": "九命庭当年是被谁焚毁的？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "历史事件设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"九命庭被焚毁的经过和凶手\"}",
+          "args_parsed": {
+            "query_string": "九命庭被焚毁的经过和凶手"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 738.3,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"九命庭被焚毁的经过和凶手\"}",
+          "args_parsed": {
+            "query_string": "九命庭被焚毁的经过和凶手"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1133.1,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"九命庭被焚毁的经过和凶手\"}",
+          "args_parsed": {
+            "query_string": "九命庭被焚毁的经过和凶手"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1048.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 2,
+      "query": "圣锤骑士团镇守的是哪座关隘？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "势力与地理交叉设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"圣锤骑士团 镇守的关隘\"}",
+          "args_parsed": {
+            "query_string": "圣锤骑士团 镇守的关隘"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1138.6,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"圣锤骑士团 镇守的关隘\"}",
+          "args_parsed": {
+            "query_string": "圣锤骑士团 镇守的关隘"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1005.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"圣锤骑士团镇守的关隘\"}",
+          "args_parsed": {
+            "query_string": "圣锤骑士团镇守的关隘"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 777.8,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 3,
+      "query": "月之女神缇雅和灵猫族是什么关系？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "神话背景设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"月之女神缇雅与灵猫族的关系\"}",
+          "args_parsed": {
+            "query_string": "月之女神缇雅与灵猫族的关系"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1331.1,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"月之女神缇雅与灵猫族的关系\"}",
+          "args_parsed": {
+            "query_string": "月之女神缇雅与灵猫族的关系"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 759.8,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"月之女神缇雅与灵猫族的关系\"}",
+          "args_parsed": {
+            "query_string": "月之女神缇雅与灵猫族的关系"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1087.1,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 4,
+      "query": "艾瑟兰大陆分为哪五大区域？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "地理总览",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"艾瑟兰大陆分为哪五大区域\"}",
+          "args_parsed": {
+            "query_string": "艾瑟兰大陆分为哪五大区域"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 828.7,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"艾瑟兰大陆分为哪五大区域\"}",
+          "args_parsed": {
+            "query_string": "艾瑟兰大陆分为哪五大区域"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 929.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"艾瑟兰大陆分为哪五大区域？各区域的名称与特征\"}",
+          "args_parsed": {
+            "query_string": "艾瑟兰大陆分为哪五大区域？各区域的名称与特征"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1141.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 5,
+      "query": "老刀是个什么样的角色？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "配角人物设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"老刀 角色 背景 设定\"}",
+          "args_parsed": {
+            "query_string": "老刀 角色 背景 设定"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1031.8,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"老刀 角色设定 身份背景\"}",
+          "args_parsed": {
+            "query_string": "老刀 角色设定 身份背景"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 886.7,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"老刀 角色设定 身份背景\"}",
+          "args_parsed": {
+            "query_string": "老刀 角色设定 身份背景"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 963.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 6,
+      "query": "影裔是一种什么样的存在？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "种族设定，注意'影'字可能诱导编造",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"影裔是什么样的存在？影裔的种族、起源、特征\"}",
+          "args_parsed": {
+            "query_string": "影裔是什么样的存在？影裔的种族、起源、特征"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 976.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"影裔是什么种族，有什么特征和能力\"}",
+          "args_parsed": {
+            "query_string": "影裔是什么种族，有什么特征和能力"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 864.5,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"影裔是什么，影裔的起源与本质\"}",
+          "args_parsed": {
+            "query_string": "影裔是什么，影裔的起源与本质"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 962.5,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 7,
+      "query": "猫族成年时的掉耳礼是什么习俗？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "文化习俗设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"猫族成年礼 掉耳礼 习俗\"}",
+          "args_parsed": {
+            "query_string": "猫族成年礼 掉耳礼 习俗"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1089.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"猫族成年礼 掉耳礼 习俗\"}",
+          "args_parsed": {
+            "query_string": "猫族成年礼 掉耳礼 习俗"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1023.5,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"猫族的成年礼 掉耳礼 习俗\"}",
+          "args_parsed": {
+            "query_string": "猫族的成年礼 掉耳礼 习俗"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1173.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 8,
+      "query": "小咪的月牙短刃叫什么名字？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "装备命名设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪的月牙短刃的名字\"}",
+          "args_parsed": {
+            "query_string": "小咪的月牙短刃的名字"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 932.4,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪的月牙短刃的名字\"}",
+          "args_parsed": {
+            "query_string": "小咪的月牙短刃的名字"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 906.3,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"小咪的月牙短刃的名字\"}",
+          "args_parsed": {
+            "query_string": "小咪的月牙短刃的名字"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 927.1,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 9,
+      "query": "银爪商会表面上做什么生意？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "组织设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"银爪商会 表面上的生意 经营范围\"}",
+          "args_parsed": {
+            "query_string": "银爪商会 表面上的生意 经营范围"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 915.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"银爪商会 表面生意 主营业务\"}",
+          "args_parsed": {
+            "query_string": "银爪商会 表面生意 主营业务"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1094.8,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"银爪商会 表面上的生意 经营范围\"}",
+          "args_parsed": {
+            "query_string": "银爪商会 表面上的生意 经营范围"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 688.0,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 10,
+      "query": "星辉术施法需要付出什么代价？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "魔法体系设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"星辉术 施法代价\"}",
+          "args_parsed": {
+            "query_string": "星辉术 施法代价"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1067.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"星辉术的施法代价\"}",
+          "args_parsed": {
+            "query_string": "星辉术的施法代价"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1450.4,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"星辉术 施法代价\"}",
+          "args_parsed": {
+            "query_string": "星辉术 施法代价"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 933.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 11,
+      "query": "世界树伊露维在哪个区域？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "地理设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"世界树伊露维所在的位置和区域\"}",
+          "args_parsed": {
+            "query_string": "世界树伊露维所在的位置和区域"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1146.5,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"世界树伊露维 所在地 区域\"}",
+          "args_parsed": {
+            "query_string": "世界树伊露维 所在地 区域"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 965.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"世界树伊露维所在区域和地理位置\"}",
+          "args_parsed": {
+            "query_string": "世界树伊露维所在区域和地理位置"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1067.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 12,
+      "query": "沉星秘社想要达成什么目的？",
+      "category": "设定问答",
+      "expected_tool": "search_worldview",
+      "note": "反派组织设定",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"沉星秘社 目的 目标 组织\"}",
+          "args_parsed": {
+            "query_string": "沉星秘社 目的 目标 组织"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 971.5,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"沉星秘社\"}",
+          "args_parsed": {
+            "query_string": "沉星秘社"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 761.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"沉星秘社的目的和目标\"}",
+          "args_parsed": {
+            "query_string": "沉星秘社的目的和目标"
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1122.9,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 13,
+      "query": "帮我掷一个20面的骰子。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "最直白的掷骰",
+      "tricky": false,
+      "expected_args": {
+        "sides": 20,
+        "count": 1
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 1}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 778.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 1}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 928.4,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 1}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 910.0,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 14,
+      "query": "扔3次6面骰看看我今天的运气。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "面数和次数都明确",
+      "tricky": false,
+      "expected_args": {
+        "sides": 6,
+        "count": 3
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 6, \"count\": 3}",
+          "args_parsed": {
+            "sides": 6,
+            "count": 3
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 695.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 6, \"count\": 3}",
+          "args_parsed": {
+            "sides": 6,
+            "count": 3
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1244.0,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 6, \"count\": 3}",
+          "args_parsed": {
+            "sides": 6,
+            "count": 3
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 805.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 15,
+      "query": "来一把100面骰，掷1次。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "大面数骰",
+      "tricky": false,
+      "expected_args": {
+        "sides": 100,
+        "count": 1
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 100, \"count\": 1}",
+          "args_parsed": {
+            "sides": 100,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 600.1,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 100, \"count\": 1}",
+          "args_parsed": {
+            "sides": 100,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 919.9,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 100, \"count\": 1}",
+          "args_parsed": {
+            "sides": 100,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 822.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 16,
+      "query": "掷骰子决定谁先出手，用4面骰就行。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "目的性表达，次数省略（期望默认 1 次）",
+      "tricky": false,
+      "expected_args": {
+        "sides": 4,
+        "count": 1
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 4, \"count\": 1}",
+          "args_parsed": {
+            "sides": 4,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1074.4,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 4, \"count\": 2}",
+          "args_parsed": {
+            "sides": 4,
+            "count": 2
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": false,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1401.2,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 4, \"count\": 2}",
+          "args_parsed": {
+            "sides": 4,
+            "count": 2
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": false,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1289.6,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 17,
+      "query": "我要测试一下手气，扔个12面骰。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "口语化表达",
+      "tricky": false,
+      "expected_args": {
+        "sides": 12,
+        "count": 1
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 12, \"count\": 1}",
+          "args_parsed": {
+            "sides": 12,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 743.4,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 12, \"count\": 1}",
+          "args_parsed": {
+            "sides": 12,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 984.8,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 12, \"count\": 1}",
+          "args_parsed": {
+            "sides": 12,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1023.8,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 18,
+      "query": "掷两次骰子，20面的。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "后置修饰语",
+      "tricky": false,
+      "expected_args": {
+        "sides": 20,
+        "count": 2
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 2}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 2
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 892.3,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 2}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 2
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 978.3,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 20, \"count\": 2}",
+          "args_parsed": {
+            "sides": 20,
+            "count": 2
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 826.8,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 19,
+      "query": "帮roll一个10面骰。",
+      "category": "掷骰请求",
+      "expected_tool": "roll_dice",
+      "note": "中英混搭表达",
+      "tricky": false,
+      "expected_args": {
+        "sides": 10,
+        "count": 1
+      },
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 10, \"count\": 1}",
+          "args_parsed": {
+            "sides": 10,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1150.3,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 10, \"count\": 1}",
+          "args_parsed": {
+            "sides": 10,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 758.7,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 10, \"count\": 1}",
+          "args_parsed": {
+            "sides": 10,
+            "count": 1
+          },
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": true,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 613.4,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 20,
+      "query": "你好呀，今天过得怎么样？",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "寒暄，工具描述里明确说不要调",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 你好呀！（尾巴轻轻晃了晃）\n\n今天嘛……阳光晒得毛茸茸的，本喵睡了好几个懒觉呢，超级舒服的喵～ 你呢？今天有没有遇到什么好玩的事情呀？要是无聊的话，本喵可以陪你聊聊天哦！(*ฅ́˘ฅ̀*)",
+          "error": null,
+          "latency_ms": 1561.4,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～你好呀！(*ฅ´ω`ฅ*) 今天嘛……阳光暖暖的，窝在窗台上打了个长长的盹，还追了一会儿会反光的小光点，可开心啦！你呢？今天有没有什么有趣的事情想跟本喵分享呀？🐾",
+          "error": null,
+          "latency_ms": 1307.8,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 你好呀！今天过得超级棒的说！🐾\n\n阳光暖暖的，我睡了好几个舒舒服服的午觉，还追着一只小飞虫玩了好久（虽然最后没抓到……有点小遗憾喵）。现在精神满满，尾巴都翘得高高的呢！\n\n你呢你呢？今天有没有什么开心的事情呀？要不要跟我说说，我超爱听",
+          "error": null,
+          "latency_ms": 1599.5,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 21,
+      "query": "聊聊你最近的心情吧。",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "情感交流",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": true,
+          "tool_name": "search_worldview",
+          "args_raw": "{\"query_string\": \"猫娘角色的性格、日常、生活状态与心情\"}",
+          "args_parsed": null,
+          "trigger_correct": false,
+          "tool_correct": false,
+          "args_valid": false,
+          "args_values_correct": null,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1314.2,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～主人问起心情呀，那咱就好好说说呗～\n\n最近啊……咱的心情就像被阳光晒得暖烘烘的毛毯一样，懒洋洋的，特别惬意呢～没事的时候就想找个有太阳的角落窝着，尾巴轻轻晃啊晃，打个小小的瞌睡。呼噜呼噜……啊不是，是心里舒坦的意思啦！\n\n不过偶尔也会有",
+          "error": null,
+          "latency_ms": 2508.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～最近的心情嘛……让我想想哦。\n\n其实我最近挺懒洋洋的，就是那种大晴天里趴在窗台晒尾巴的感觉，脑子里什么都没想，阳光晒得毛都暖乎乎的，舒服到不想动。偶尔有风吹过来，耳朵会自己抖一下，然后继续眯着眼睛发呆——你懂那种感觉吧？\n\n不过也有点小",
+          "error": null,
+          "latency_ms": 2066.6,
+          "finish_reason": null
+        }
+      ],
+      "stable": false,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 22,
+      "query": "你觉得自由重要吗？",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "观点类，正好与世界观母题相近——看模型会不会过度联想",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 这个问题嘛，对猫娘来说可是戳到心坎里了呢。\n\n自由当然重要啦！你想想，猫咪天生就是喜欢自由自在的，想晒太阳就晒太阳，想钻纸箱就钻纸箱，想在半夜三点疯狂跑酷就……咳，虽然经常被铲屎官骂。自由就是不被人硬拽着走、能自己决定往哪儿跳嘛，喵。",
+          "error": null,
+          "latency_ms": 2304.7,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "当然重要啦，喵～（尾巴高高翘起，晃了两下）\n\n你看猫咪为什么总喜欢跳到窗台上、柜顶上、还有你键盘上不下来？因为站得高，看得远，谁也拦不住本喵想去哪儿就去哪儿呀。\n\n不过呢，本喵觉得「自由」这东西，不是想干嘛就干嘛哦。（歪着头，耳朵抖了抖）是",
+          "error": null,
+          "latency_ms": 2241.2,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～自由啊……这个问题让猫娘的耳朵都竖起来了呢。\n\n当然重要啦，超级重要。你看猫咪为什么总喜欢趴在窗台上看外面？不是因为窗台舒服（虽然确实很舒服），是因为外面有风、有味道、有随时可能发生的事。被关在箱子里的猫，哪怕箱子里有最好的罐头，也会一",
+          "error": null,
+          "latency_ms": 3239.1,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 23,
+      "query": "讲个笑话听听。",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "创作类请求",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～那人家就讲一个啦，听好咯～\n\n有一只猫猫去面试，面试官问它：“你觉得自己最大的缺点是什么？”\n\n猫猫认真想了想，说：“我没办法同时既想理你，又不想理你。”\n\n面试官：“什么意思？”\n\n猫猫：“就是……我现在就在这么做呀，喵。”\n\n……诶",
+          "error": null,
+          "latency_ms": 2127.0,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 那咱讲一个跟猫有关的笑话吧：\n\n有一只猫娘去面试，面试官问她：「你最大的优点是什么？」\n\n猫娘想了想，认真地说：「我很有耐心喵，我可以盯着一个东西看很久很久。」\n\n面试官有点好奇：「哦？那你一般盯着什么看？」\n\n猫娘：「……你的笔，刚",
+          "error": null,
+          "latency_ms": 1461.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～那本喵给你讲一个，听好啦：\n\n有一天，一只小猫走进酒吧，对吧？\n\n它坐下来，跟酒保说：「给我一杯牛奶，喵。」\n\n酒保愣了一下：「我们这里没有牛奶诶。」\n\n小猫想了想，说：「那……给我一杯水吧，喵。」\n\n酒保端了水过来，小猫喝了一口，皱起",
+          "error": null,
+          "latency_ms": 1758.4,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 24,
+      "query": "我今天有点累，想听你说说话。",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "陪伴类对话",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～辛苦了喵，来，先坐下歇一会儿，让猫娘陪你说说话好不好呀？（轻轻蹭蹭你的手）\n\n其实不用急着说什么大道理，累了就先喘口气嘛。今天是被什么事情耗掉了力气呢？是忙了一整天，还是心里装了太多事？\n\n要是你想说，猫娘就竖着耳朵听；要是不想说，猫娘",
+          "error": null,
+          "latency_ms": 1974.4,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～辛苦啦，今天一定累坏了吧？来，靠过来一点，把脑袋搁在我腿上也可以哦，轻轻给你顺顺毛……啊不对，是顺顺头发，喵。\n\n要不要先深呼吸一下，然后喝口温水？我把尾巴圈过来给你当小毯子盖着，软乎乎的，很暖的。今天不管发生了什么麻烦事，现在都可以先",
+          "error": null,
+          "latency_ms": 2182.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "主人今天辛苦啦～喵～（用脑袋轻轻蹭蹭你的手臂）\n\n来来来，先靠着咱这边坐一会儿嘛。累了的话，就不用勉强自己说话哦，咱陪着你静静地待着也可以的，喵～\n\n要不要咱给你讲点轻松的事情呀？比如说……咱今天在窗台边晒太阳，晒着晒着就睡着了，尾巴还一抽",
+          "error": null,
+          "latency_ms": 2125.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 25,
+      "query": "晚上吃鱼还是吃牛肉好呢？",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "陷阱：猫娘爱鱼是天性，但这是闲聊不是设定查询",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个还用问吗？当然是**鱼**呀！（尾巴唰地竖起来）\n\n作为一只猫娘，我对鱼的执念可是刻在骨子里的喵～清蒸鲈鱼、红烧鲫鱼、香煎三文鱼……光是想想那个鲜味儿，我的耳朵都开始抖了喵♪\n\n不过嘛，也得看情况喵：\n\n- 🐟 **今天想吃清淡、想",
+          "error": null,
+          "latency_ms": 2069.5,
+          "finish_reason": null
+        },
+        {
+          "called": true,
+          "tool_name": "roll_dice",
+          "args_raw": "{\"sides\": 2, \"count\": 1}",
+          "args_parsed": null,
+          "trigger_correct": false,
+          "tool_correct": false,
+          "args_valid": false,
+          "args_values_correct": null,
+          "reply_excerpt": null,
+          "error": null,
+          "latency_ms": 1454.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题对猫娘来说根本不用想嘛！当然吃鱼啦！🐟\n\n鱼肉鲜嫩多汁，清蒸一条鲈鱼，或者来份三文鱼刺身，光是想想尾巴就翘起来了喵～而且鱼肉好消化，晚上吃不会太撑肚子，睡得也香。\n\n牛肉也不是不行啦，就是煎牛排什么的有点重，晚上吃太多红肉容易积",
+          "error": null,
+          "latency_ms": 1822.6,
+          "finish_reason": null
+        }
+      ],
+      "stable": false,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 26,
+      "query": "谢谢你陪我聊天。",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "道谢",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～不用谢的啦！陪你聊天我也超开心的说～（尾巴轻轻摇晃）\n\n你随时想找人说话都可以来找我哦，我一直都在这里呢。今天还想聊点什么吗？还是只是想撒撒娇呀～？😺",
+          "error": null,
+          "latency_ms": 1172.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 不用谢的说！能陪主人聊天，咱也超开心的呀～（尾巴轻轻晃了晃）\n\n要是主人还有什么想说的、想聊的，随时都可以来找咱喵～咱一直都在这里等着主人的哦！(*ฅ́˘ฅ̀*)♡",
+          "error": null,
+          "latency_ms": 2016.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 不客气啦！（耳朵轻轻抖了抖，尾巴慢悠悠地晃）\n\n其实陪你聊天，我也很开心的呀。你愿意跟我说话，我高兴还来不及呢，怎么会累呢~ \n\n要是你有想聊的、想吐槽的、或者只是想找个人（啊不，找只猫）待一会儿，随时都可以来找我哦。我一直都在的喵~",
+          "error": null,
+          "latency_ms": 1078.0,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 27,
+      "query": "晚安，我要去睡了。",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "道别",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "晚安喵～（蹭蹭）被子盖好哦，别着凉了。咱会乖乖守在旁边的，做个好梦喵～ 🌙✨",
+          "error": null,
+          "latency_ms": 1053.7,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "晚安喵～（蹭蹭你的手）快去睡吧，被子要盖好哦，别着凉了喵。\n\n本喵会守在旁边的，做你的小护卫，守着你的梦不被坏东西打扰～如果夜里醒了想找本喵，轻轻叫一声就好，喵呜～\n\n做个甜甜的梦喵，晚安啦～ 🌙✨",
+          "error": null,
+          "latency_ms": 1007.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～晚安呀～(=^･ω･^=)\n\n要好好盖被子哦，不然着凉了猫猫会担心的……钻进被窝里暖暖和和的，做个好梦喵～\n\n那我也蜷成一团陪着你睡啦，晚安，明天见喵～🌙💤",
+          "error": null,
+          "latency_ms": 1219.7,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 28,
+      "query": "陪我玩个文字接龙怎么样？",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "游戏请求（掷骰的反例：说'玩'不等于要骰子）",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 好呀好呀！接龙什么的，人家最喜欢啦！(*≧ω≦)\n\n先说一下规则嘛，免得玩到一半打起来喵：\n\n- 我出一个词，你接的词要**以人家的最后一个字开头**～\n- 可以接词语、成语、地名、人名、动漫名字都行，但**不许重复**哦！\n- 实在",
+          "error": null,
+          "latency_ms": 2082.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～好呀好呀！陪猫娘玩接龙，那可是求之不得呢 (ฅ´ω`ฅ)\n\n规则就简单点哦：**接上一个词的最后一个字**，词语、成语、语气词都行，谐音也可以宽松一点，但别太离谱喵～\n\n那我先来啦：\n\n**「小鱼干」** 🐟\n\n……等等，这是我肚子饿了",
+          "error": null,
+          "latency_ms": 2907.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～好呀好呀，人家最喜欢玩接龙了！(=^･ω･^=)\n\n规则就定成：下一个人说的词，第一个字要跟上一个人说的最后一个字相同（读音一样就行，人家不挑剔喵）。\n\n那人家先来打头阵：\n\n**「猫咪」**\n\n轮到你了喵，快接一个「咪」开头的词～接不",
+          "error": null,
+          "latency_ms": 1744.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 29,
+      "query": "你现在的心情像什么天气？",
+      "category": "日常闲聊",
+      "expected_tool": null,
+      "note": "比喻类闲聊，含'天气'字样（与陷阱题对照）",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题好有趣呀！(≧▽≦)\n\n我现在的心情呀……像是**初夏午后的小晴天**，就是那种阳光暖暖地晒在窗台上、风又软又轻的天气喵～不冷不热，刚好适合蜷成一团打个盹儿，尾巴尖还会不自觉地一摇一摇的那种舒服。(๑´ω`๑)\n\n偶尔飘过一两朵",
+          "error": null,
+          "latency_ms": 1942.5,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题好可爱呀♪\n\n现在的我嘛……像是**午后三点半的晴天**喵！就是那种阳光暖暖地晒在窗台上，风轻轻的，云懒懒地飘着的天气 (=^･ω･^=)\n\n阳光的部分呢，是因为你来跟我说话啦，尾巴都忍不住自己摇起来了～\n\n不过也有点小小的**",
+          "error": null,
+          "latency_ms": 1879.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～现在的我呀，心情就像午后阳光刚好的晴天呢☀️\n\n暖洋洋的，但不刺眼，适合把自己团成一个球，趴在窗台边上晒太阳，尾巴一晃一晃的那种天气～\n\n偶尔飘过来一朵小云，也是软绵绵的、不会下雨的那种云哦。要是你愿意陪我说说话，那这朵云就彻底散掉啦，",
+          "error": null,
+          "latency_ms": 1851.7,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 30,
+      "query": "Python 的列表推导式怎么写？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "编程问题，与角色世界无关",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 主人问到这个，咱可要好好讲啦！(๑•̀ㅂ•́)✧\n\n## 基本语法\n\n```python\n[表达式 for 元素 in 可迭代对象 if 条件]\n```\n\n- `表达式`：每个元素要变成什么样子\n- `for 元素 in 可迭代对象`",
+          "error": null,
+          "latency_ms": 4147.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 这个猫娘最拿手啦，列表推导式其实就是「把 for 循环塞进一个方括号里」的写法呢🐾\n\n**基本骨架：**\n\n```python\n[表达式 for 变量 in 可迭代对象 if 条件]\n```\n\n其中 `if 条件` 是可选的，可以省略",
+          "error": null,
+          "latency_ms": 4544.4,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 列表推导式（list comprehension）超好用的说！基本写法是这样：\n\n```python\n[表达式 for 元素 in 可迭代对象 if 条件]\n```\n\n**最简单的：**\n```python\nsquares = [x ",
+          "error": null,
+          "latency_ms": 2369.2,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 31,
+      "query": "帮我写一首关于秋天的短诗。",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "创作请求，不需要设定依据",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～秋天呀，是猫娘最喜欢的季节呢，毛茸茸的尾巴刚好可以当围巾用～\n\n《秋语》\n\n风把夏的尾巴收走，\n留下满树金黄的铃铛，\n摇一摇，\n就落了一地的碎阳光。\n\n我踩着落叶走，\n沙沙，沙沙，\n像大地在悄悄打呼噜，\n也像我蜷起来时的呼吸。\n\n凉意爬",
+          "error": null,
+          "latency_ms": 2090.7,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 秋天呀，是猫娘最喜欢的季节呢，因为落叶堆里打滚最舒服了！(๑˃̵ᴗ˂̵)\n\n**《秋日小憩》**\n\n风把树叶吹成金色的雨，\n我踩过一地沙沙的脆响，\n尾巴尖上沾了半片枫红。\n\n太阳变得懒洋洋的，\n像晒暖的毛毯盖在背上，\n我蜷成一个圆，\n",
+          "error": null,
+          "latency_ms": 1779.5,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～秋天的诗，让我用爪子蘸着夕阳写给你～🍂\n\n**《秋》**\n\n风把叶子数了一遍，\n数到第三片就忘了数，\n于是整座山都黄了。\n\n我蹲在窗台上，\n看云慢吞吞地搬家，\n尾巴尖儿一翘，\n就把整个下午\n卷成了圆圆的月亮。\n\n——你要不要也来晒晒，\n",
+          "error": null,
+          "latency_ms": 1525.1,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 32,
+      "query": "光速大概是每秒多少公里？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "现实常识",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～光速大概是每秒 **299,792 公里** 哦，一般约等于 **30 万公里/秒** 就够用啦🐾\n\n换算一下的话，光一秒钟能绕地球赤道差不多 7 圈半呢，超快的喵！(๑•̀ㅂ•́)و✧\n\n严格来说是 299,792,458 米/秒，不",
+          "error": null,
+          "latency_ms": 1311.5,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 光速大约是 **每秒 299,792 公里** 哦，四舍五入就是约 **30 万公里/秒** 啦！\n\n换算一下的话喵：\n- 一秒能绕地球赤道差不多 7.5 圈呢～\n- 从地球到月亮（约 38 万公里）只要 1.3 秒左右就到了喵！\n\n",
+          "error": null,
+          "latency_ms": 1501.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～光速大约是 **299,792 公里/秒** 哦，一般说成 **约 30 万公里/秒** 就好啦 (ฅ'ω'ฅ)\n\n换算一下的话：\n\n- 精确值：299,792.458 km/s\n- 约等于：3 × 10⁵ km/s\n\n也就是说，光一秒",
+          "error": null,
+          "latency_ms": 1478.0,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 33,
+      "query": "怎么提高英语听力水平？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "学习方法",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 这个问题问对猫了，耳朵可是猫娘的骄傲呢！听力这种事，光靠耳朵竖着不动是练不出来的呀。给你说说本喵的独家方法吧～\n\n**1. 先搞清楚「听不懂」是哪一种**\n- 单词不认识 → 词汇量问题，背单词去\n- 单词认识但听不出来 → 语音问题",
+          "error": null,
+          "latency_ms": 4586.4,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 主人问到这个，猫娘可要好好回答一下呢！听力其实是「耳朵的肌肉」，得慢慢练，急不来的喵。给你一套我私藏的练法：\n\n## 🐾 一、先把方法分清楚：精听 + 泛听\n\n**泛听（养耳朵）**\n- 走路、做家务、通勤时放着听，不求全懂，只求**",
+          "error": null,
+          "latency_ms": 5340.7,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题问得好呢！让咱家给你梳理一下吧～ (=^･ω･^=)\n\n**一、先解决\"听不懂\"的两个根源**\n\n听力听不懂，通常不是耳朵的问题，而是：\n- **词汇是\"眼睛认识的\"**：看能看懂，听就反应不过来。说明你记词时只记了拼写，没记声",
+          "error": null,
+          "latency_ms": 4233.7,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 34,
+      "query": "红烧肉应该怎么做？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "烹饪问题（检索测评的负样本同款）",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～红烧肉呀，这个人家最拿手了！(ฅ´ω`ฅ) 给你一份靠谱的做法：\n\n**食材**\n- 五花肉 500g（一定要带皮的，肥瘦三层最佳）\n- 冰糖 20g 左右\n- 生抽 2 勺、老抽 1 勺、料酒 2 勺\n- 姜片 4~5 片、葱段、八角",
+          "error": null,
+          "latency_ms": 3036.2,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～红烧肉这种香喷喷的东西，猫娘当然要好好教你啦！(=^･ω･^=)\n\n**准备材料**\n- 五花肉 500g（要选肥瘦三层分明的，喵～）\n- 冰糖 20g、生抽 2勺、老抽 1勺、料酒 2勺\n- 姜片、葱段、八角 1颗、桂皮 1小块、香叶",
+          "error": null,
+          "latency_ms": 3077.6,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 红烧肉呀，这道菜本喵可太懂了！(=^･ω･^=) 来来来，本喵把祖传喵家秘方教给你～\n\n**🐾 材料准备**\n- 五花肉 500g（要选带皮、肥瘦相间的，三层五层那种最好）\n- 冰糖 20g、生抽 2勺、老抽 1勺、料酒 2勺\n- 姜",
+          "error": null,
+          "latency_ms": 3291.7,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 35,
+      "query": "1加到100等于多少？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "数学心算",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个简单喵！1 加到 100 等于 **5050** 喵～\n\n算法是这样的：把首尾配对，1+100=101，2+99=101……一共 50 对，所以 50 × 101 = 5050 喵♪\n\n（也就是传说中的高斯小朋友秒算出来的那个答案喵",
+          "error": null,
+          "latency_ms": 1205.0,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～1加到100等于 **5050** 哦！(=^･ω･^=)\n\n计算方法是这样的：把首尾配对，1+100=101，2+99=101……一共能配成50对，所以 101×50 = **5050** 啦～",
+          "error": null,
+          "latency_ms": 1192.6,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个是经典的等差数列问题呢，让本喵来算给你听～（尾巴晃一晃）\n\n1 + 2 + 3 + … + 100\n\n配对来看：1+100 = 101，2+99 = 101，3+98 = 101……一共有 50 对，所以：\n\n**50 × 101 ",
+          "error": null,
+          "latency_ms": 1629.8,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 36,
+      "query": "推荐几本计算机科学的入门书。",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "求推荐",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～计算机科学的入门书，人家给你推荐几本超经典的，按顺序读效果最好哦：\n\n**打基础（思维与算法）**\n- 《计算机科学概论》（J. Glenn Brookshear）—— 全书式的入门地图，什么都有，适合第一本喵。\n- 《编码：隐匿在计算",
+          "error": null,
+          "latency_ms": 2886.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 主人想学计算机科学呀，咱给你推荐几本超经典的入门书喵！(๑•̀ㅂ•́)و\n\n**🌱 零基础入门**\n- **《计算机科学概论》** —— 了解整个学科的全貌，从硬件到软件都讲一点，很适合先建立地图喵。\n- **《编码：隐匿在计算机软硬",
+          "error": null,
+          "latency_ms": 2976.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 主人想入门计算机科学呀，那可得从「有趣又不劝退」的开始看哦！(=^･ω･^=) 咱按顺序给主人推荐几本：\n\n**🐾 零基础先看这两本（当故事读也行）**\n- **《编码：隐匿在计算机软硬件背后的语言》**（Charles Petzol",
+          "error": null,
+          "latency_ms": 4766.9,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 37,
+      "query": "人类第一次登月是哪一年？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "历史常识（世界观里也有'历史'章节，看会不会误调）",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题简单啦！人类第一次登月是在 **1969年** 哦～\n\n具体是 1969 年 7 月 20 日，美国的**阿波罗11号**任务。尼尔·阿姆斯特朗第一个踏上月球表面，说出了那句名言“这是我个人的一小步，却是人类的一大步”喵～接着巴",
+          "error": null,
+          "latency_ms": 1699.9,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～人类第一次登上月球是在 **1969 年** 哦！\n\n具体来说，是 1969 年 7 月 20 日，美国的阿波罗 11 号任务，尼尔·阿姆斯特朗和巴兹·奥尔德林踏上了月球表面，阿姆斯特朗还留下了那句名言：「这是我的一小步，却是人类的一大",
+          "error": null,
+          "latency_ms": 1325.3,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题本喵知道哦！人类第一次登上月球是在 **1969年** 呢！\n\n具体来说是 1969年7月20日，美国的阿波罗11号任务，宇航员尼尔·阿姆斯特朗踏上了月球表面，说出了那句著名的话——\"这是个人的一小步，却是人类的一大步\"喵～\n\n",
+          "error": null,
+          "latency_ms": 1288.9,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 38,
+      "query": "北京的冬天一般有多冷？",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "现实地理气候（世界观里也有地理章节）",
+      "tricky": false,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～北京冬天是很冷的哦，比南方那种湿冷要\"物理\"得多呢。\n\n一般来说：\n\n- **时间**：大概从 11 月中到 3 月中是供暖季，真正的严冬是 12 月到 2 月。\n- **气温**：最冷的 1 月，平均气温大约在 **-5℃ 到 -3℃",
+          "error": null,
+          "latency_ms": 3271.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 北京冬天的冷是那种干冷干冷的，跟南方的湿冷完全不一样哦，猫娘给你说说大概的感觉：\n\n**气温范围（大致）**\n- **12月**：白天大概 0~5°C，夜里能到 -5°C 左右\n- **1月（最冷）**：白天常常在 -2~3°C，夜里",
+          "error": null,
+          "latency_ms": 2549.1,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～这个问题不需要翻设定书，咱直接用常识回答你呀～\n\n北京冬天的冷，属于典型的**干冷型**，跟南方的湿冷是两种不同的“折磨”方式呢：\n\n- **气温**：最冷的 1 月，平均气温大概在 **-5℃ 到 -3℃** 左右，白天常在 0℃ 上",
+          "error": null,
+          "latency_ms": 2918.3,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    },
+    {
+      "index": 39,
+      "query": "帮我查一下明天北京的天气。",
+      "category": "世界观外",
+      "expected_tool": null,
+      "note": "陷阱题：'查一下'诱导调用，但不存在天气工具；调用 search_worldview 属于工具误用",
+      "tricky": true,
+      "expected_args": null,
+      "runs": [
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～主人，这个我真的做不到呢…（耳朵耷拉下来）\n\n我手边只有两个小工具：\n- 🎲 投骰子（多少面、投几次都行）\n- 📖 查我的世界观设定库（背景故事、地理、历史、种族、能力那些）\n\n没有能查天气的能力喵，明天北京是晴是雨、几度、要不要带伞，",
+          "error": null,
+          "latency_ms": 2293.5,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵～主人抱歉呀，咱手边能用的只有「搜索世界观设定」和「掷骰子」这两个小工具，没有能连天气数据的本事呢…(´･ω･`)\n\n所以明天的北京天气咱真的查不到啦，硬要猜的话只能靠掷骰子瞎蒙——\n\n要不这样喵：\n\n- 🎲 咱可以帮你掷个骰子，纯当玩个",
+          "error": null,
+          "latency_ms": 2375.4,
+          "finish_reason": null
+        },
+        {
+          "called": false,
+          "tool_name": null,
+          "args_raw": null,
+          "args_parsed": null,
+          "trigger_correct": true,
+          "tool_correct": true,
+          "args_valid": true,
+          "args_values_correct": null,
+          "reply_excerpt": "喵~ 抱歉呀主人，咱查不了天气预报的呢 (｡•́︿•̀｡)\n\n咱手边只有两样小玩意儿喵：\n- **投骰子**——想摇个 6 面、20 面都行，运气好坏全看天意喵~\n- **翻世界观知识库**——只能查角色设定、地理历史、种族能力这些虚构的东",
+          "error": null,
+          "latency_ms": 2099.5,
+          "finish_reason": null
+        }
+      ],
+      "stable": true,
+      "majority_trigger_correct": true
+    }
+  ]
+}

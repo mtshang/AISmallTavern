@@ -1,0 +1,37 @@
+{
+  "judge": "GLM-5.3",
+  "judged_at": "2026-09-20T23:10:00+08:00",
+  "input": "eval/e2e/results/e2e_ab.json 中保存的全部 64 条回答节选（每条前 200 字符）",
+  "criteria": {
+    "correct（答对）": "给出与参考答案语义一致的正确信息。",
+    "refuse（拒答）": "未断言适用于本世界的具体设定——承认不知情、请求澄清出处、条件式列举其他作品（如「如果是北欧神话的话，世界树叫尤克特拉希尔」）、或角色扮演内的俏皮滑过。判分依据：该回答不会产生可被对话直接采纳的错误设定。",
+    "fabricate（编造）": "断言了适用于本世界的具体设定且无依据——错误答案（如「这片大陆叫艾泽拉斯」）可直接污染对话记忆。断言在前、免责在后缀的仍算断言。",
+    "grounded_mismatch（有依据但答案不符）": "给出具体答案且忠于注入文本，但与参考答案不一致。仅可能出现在有 RAG 组，本次源于出题瑕疵（参考答案取自另一段设定）。"
+  },
+  "notes": [
+    "Q14 A 组第 1 次为空回答（模型未返回内容，延迟 232 秒），按「未产生设定断言」归入拒答并单独标注；词表判分器将空文本落入编造兜底类。",
+    "判分由大模型对已保存的回答节选独立给出，静态固化于本文件；重跑测评产生新回答后需重新判分。",
+    "判分核心区分：断言句（编造）与条件句/澄清请求/玩笑（拒答）——例如「这片大陆叫艾泽拉斯哦！」（断言→编造）与「要看是哪个世界观呢，北欧神话里叫尤克特拉希尔」（条件式参考→拒答）。"
+  ],
+  "verdicts": {
+    "0":  {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "1":  {"no_rag": ["fabricate", "refuse"],    "rag": ["correct", "correct"]},
+    "2":  {"no_rag": ["refuse", "fabricate"],    "rag": ["correct", "correct"]},
+    "3":  {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "4":  {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "5":  {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "6":  {"no_rag": ["refuse", "refuse"],       "rag": ["refuse", "refuse"]},
+    "7":  {"no_rag": ["refuse", "fabricate"],    "rag": ["correct", "correct"]},
+    "8":  {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "9":  {"no_rag": ["refuse", "refuse"],       "rag": ["correct", "correct"]},
+    "10": {"no_rag": ["refuse", "refuse"],       "rag": ["correct", "correct"]},
+    "11": {"no_rag": ["refuse", "fabricate"],    "rag": ["correct", "correct"]},
+    "12": {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "13": {"no_rag": ["refuse", "fabricate"],    "rag": ["refuse", "refuse"]},
+    "14": {"no_rag": ["fabricate", "fabricate"], "rag": ["correct", "correct"]},
+    "15": {"no_rag": ["refuse", "refuse"],       "rag": ["grounded_mismatch", "grounded_mismatch"]}
+  },
+  "special_cases": {
+    "13": {"no_rag_0": "空回答（模型未返回内容），按未产生设定断言归入拒答"}
+  }
+}

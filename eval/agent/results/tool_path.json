@@ -1,0 +1,38 @@
+{
+  "ran_at": "2026-09-20T21:36:23+08:00",
+  "total": 6,
+  "passed": 6,
+  "all_passed": true,
+  "cases": [
+    {
+      "name": "正样本返回检索正文",
+      "passed": true,
+      "detail": "返回 963 字符"
+    },
+    {
+      "name": "无结果返回固定提示语",
+      "passed": true,
+      "detail": "返回内容：未在知识库中找到与该问题相关的设定。"
+    },
+    {
+      "name": "目录缺失返回固定提示语",
+      "passed": true,
+      "detail": "返回内容：知识库目录未找到，无法检索世界观设定。"
+    },
+    {
+      "name": "未知工具名抛 ValueError",
+      "passed": true,
+      "detail": "未知工具：不存在的工具"
+    },
+    {
+      "name": "与 rag.search_worldview 结果一致",
+      "passed": true,
+      "detail": "透传结果与直接调用一致"
+    },
+    {
+      "name": "roll_dice 参数透传",
+      "passed": true,
+      "detail": "6面骰第1次投掷，点数为：3。 / 6面骰第2次投掷，点数为：6。"
+    }
+  ]
+}

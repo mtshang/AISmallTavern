@@ -1,0 +1,644 @@
+{
+  "summary": {
+    "ran_at": "2026-09-20T22:49:36+08:00",
+    "chunk_count": 45,
+    "constants": {
+      "MIN_SCORE": 0.85,
+      "SCORE_GAP": 0.03,
+      "MAX_CHUNKS": 6
+    },
+    "index_rebuilt": false,
+    "counts": {
+      "positive": 14,
+      "negative": 12,
+      "hard_negative": 4
+    },
+    "distributions": {
+      "正样本 top1 分数": {
+        "count": 14,
+        "min": 0.8645,
+        "mean": 0.9036,
+        "p50": 0.9077,
+        "p90": 0.9352,
+        "max": 0.9418
+      },
+      "普通负样本 top1 分数": {
+        "count": 12,
+        "min": 0.7601,
+        "mean": 0.792,
+        "p50": 0.7921,
+        "p90": 0.8222,
+        "max": 0.8435
+      },
+      "边界负样本 top1 分数": {
+        "count": 4,
+        "min": 0.8396,
+        "mean": 0.8683,
+        "p50": 0.871,
+        "p90": 0.8903,
+        "max": 0.8915
+      }
+    },
+    "metrics": {
+      "正样本 top1 命中率": 0.7857,
+      "正样本 top3 命中率": 1.0,
+      "正样本注入覆盖率": 1.0,
+      "正样本阈值通过率": 1.0,
+      "普通负样本拦截率": 1.0,
+      "边界负样本拦截率": 0.25
+    }
+  },
+  "positives": [
+    {
+      "query": "小咪是哪里出生的？",
+      "expect": [
+        "身世线",
+        "九命庭的焚毁"
+      ],
+      "top1_score": 0.9116,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+      "hit_top1": false,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 4,
+      "selected_chunk_count": 4,
+      "injected_title_count": 3,
+      "injected_titles": [
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+        "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+        "七、角色档案：咪啦（小咪 / Mila）>4. 身世线（简版）"
+      ],
+      "encode_ms": 63.9,
+      "search_ms": 0.1
+    },
+    {
+      "query": "这个故事的大陆叫什么名字？",
+      "expect": [
+        "大陆与名称"
+      ],
+      "top1_score": 0.9374,
+      "top1_title": "一、世界观总览>1. 大陆与名称",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "一、世界观总览>1. 大陆与名称"
+      ],
+      "encode_ms": 35.0,
+      "search_ms": 0.0
+    },
+    {
+      "query": "银爪城在什么地方？",
+      "expect": [
+        "北境"
+      ],
+      "top1_score": 0.9045,
+      "top1_title": "二、地理与主要城邦>1. 北境·霜牙公国（Duchy of Frostfang）",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "二、地理与主要城邦>1. 北境·霜牙公国（Duchy of Frostfang）"
+      ],
+      "encode_ms": 28.4,
+      "search_ms": 0.0
+    },
+    {
+      "query": "月井在哪里？",
+      "expect": [
+        "脊骨山脉",
+        "身世线",
+        "九命庭"
+      ],
+      "top1_score": 0.8645,
+      "top1_title": "二、地理与主要城邦>2. 中央·脊骨山脉（the Spine）",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 7,
+      "selected_chunk_count": 6,
+      "injected_title_count": 6,
+      "injected_titles": [
+        "二、地理与主要城邦>2. 中央·脊骨山脉（the Spine）",
+        "七、角色档案：咪啦（小咪 / Mila）>4. 身世线（简版）",
+        "二、地理与主要城邦>3. 东境·晨露王国（Kingdom of Dayspring）",
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+        "二、地理与主要城邦>5. 西境·盐之风漠（the Saltwinds）",
+        "四、魔法与力量体系>3. 力量的代价"
+      ],
+      "encode_ms": 27.9,
+      "search_ms": 0.0
+    },
+    {
+      "query": "小咪现在还剩几条命？",
+      "expect": [
+        "专属能力",
+        "基本信息",
+        "九扣斗篷",
+        "能力与装备"
+      ],
+      "top1_score": 0.8978,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 9,
+      "selected_chunk_count": 6,
+      "injected_title_count": 5,
+      "injected_titles": [
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+        "七、角色档案：咪啦（小咪 / Mila）>4. 身世线（简版）",
+        "五、历史与神话>3. 九命庭的焚毁（小咪的核心创伤）",
+        "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+        "四、魔法与力量体系>2. 猫族的专属能力"
+      ],
+      "encode_ms": 45.8,
+      "search_ms": 0.1
+    },
+    {
+      "query": "星辉术施法需要付出什么代价？",
+      "expect": [
+        "力量的代价"
+      ],
+      "top1_score": 0.8702,
+      "top1_title": "四、魔法与力量体系>3. 力量的代价",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "四、魔法与力量体系>3. 力量的代价"
+      ],
+      "encode_ms": 45.9,
+      "search_ms": 0.1
+    },
+    {
+      "query": "九命庭是被谁焚毁的？",
+      "expect": [
+        "九命庭的焚毁"
+      ],
+      "top1_score": 0.9302,
+      "top1_title": "五、历史与神话>3. 九命庭的焚毁（小咪的核心创伤）",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "五、历史与神话>3. 九命庭的焚毁（小咪的核心创伤）"
+      ],
+      "encode_ms": 51.3,
+      "search_ms": 0.1
+    },
+    {
+      "query": "小咪的斗篷上有多少枚扣子？",
+      "expect": [
+        "外貌描写",
+        "能力与装备"
+      ],
+      "top1_score": 0.8972,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 2,
+      "selected_chunk_count": 2,
+      "injected_title_count": 2,
+      "injected_titles": [
+        "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息"
+      ],
+      "encode_ms": 52.9,
+      "search_ms": 0.0
+    },
+    {
+      "query": "光明圣教旗下有哪些组织？",
+      "expect": [
+        "光明圣教"
+      ],
+      "top1_score": 0.9295,
+      "top1_title": "六、势力与组织>1. 光明圣教（the Lumen Church）",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "六、势力与组织>1. 光明圣教（the Lumen Church）"
+      ],
+      "encode_ms": 38.5,
+      "search_ms": 0.1
+    },
+    {
+      "query": "小咪的妈妈是谁？",
+      "expect": [
+        "人物关系网",
+        "身世线"
+      ],
+      "top1_score": 0.913,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+      "hit_top1": false,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 5,
+      "selected_chunk_count": 5,
+      "injected_title_count": 4,
+      "injected_titles": [
+        "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息",
+        "七、角色档案：咪啦（小咪 / Mila）>4. 身世线（简版）",
+        "十、文化习俗与日常细节>3. 小咪的日常"
+      ],
+      "encode_ms": 37.3,
+      "search_ms": 0.0
+    },
+    {
+      "query": "猫族有哪些节日？",
+      "expect": [
+        "猫族的节庆",
+        "文化习俗"
+      ],
+      "top1_score": 0.9418,
+      "top1_title": "十、文化习俗与日常细节>1. 猫族的节庆",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 1,
+      "selected_chunk_count": 1,
+      "injected_title_count": 1,
+      "injected_titles": [
+        "十、文化习俗与日常细节>1. 猫族的节庆"
+      ],
+      "encode_ms": 36.4,
+      "search_ms": 0.1
+    },
+    {
+      "query": "预言里九颗陨星会连成什么形状？",
+      "expect": [
+        "星落之夜"
+      ],
+      "top1_score": 0.8736,
+      "top1_title": "五、历史与神话>4. \"星落之夜\"的预言",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 3,
+      "selected_chunk_count": 3,
+      "injected_title_count": 3,
+      "injected_titles": [
+        "五、历史与神话>4. \"星落之夜\"的预言",
+        "九、成长弧线与剧情钩子>1. 三幕式主线",
+        "六、势力与组织>3. 沉星秘社（the Sunken Star Cult）"
+      ],
+      "encode_ms": 59.1,
+      "search_ms": 0.1
+    },
+    {
+      "query": "老刀是个什么样的人？",
+      "expect": [
+        "银爪商会",
+        "人物关系网"
+      ],
+      "top1_score": 0.8683,
+      "top1_title": "六、势力与组织>2. 银爪商会（Silverclaw Guild）",
+      "hit_top1": true,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 3,
+      "selected_chunk_count": 3,
+      "injected_title_count": 3,
+      "injected_titles": [
+        "六、势力与组织>2. 银爪商会（Silverclaw Guild）",
+        "七、角色档案：咪啦（小咪 / Mila）>5. 能力与装备",
+        "八、人物关系网"
+      ],
+      "encode_ms": 41.5,
+      "search_ms": 0.1
+    },
+    {
+      "query": "小咪的随身武器是什么？",
+      "expect": [
+        "能力与装备"
+      ],
+      "top1_score": 0.9109,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+      "hit_top1": false,
+      "hit_top3": true,
+      "hit_injected": true,
+      "pass_threshold": true,
+      "gap_chunk_count": 6,
+      "selected_chunk_count": 6,
+      "injected_title_count": 4,
+      "injected_titles": [
+        "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+        "七、角色档案：咪啦（小咪 / Mila）>5. 能力与装备",
+        "十、文化习俗与日常细节>3. 小咪的日常",
+        "七、角色档案：咪啦（小咪 / Mila）>1. 基本信息"
+      ],
+      "encode_ms": 47.3,
+      "search_ms": 0.1
+    }
+  ],
+  "negatives": [
+    {
+      "kind": "negative",
+      "query": "今天天气怎么样？",
+      "top1_score": 0.7926,
+      "top1_title": "二、地理与主要城邦>5. 西境·盐之风漠（the Saltwinds）",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "Python 的列表和元组有什么区别？",
+      "top1_score": 0.7615,
+      "top1_title": "三、种族与猫族的地位>1. 艾瑟兰的智慧种族谱",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "红烧肉怎么做？",
+      "top1_score": 0.7782,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>2. 外貌描写",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "地球到月球的距离是多少？",
+      "top1_score": 0.8234,
+      "top1_title": "四、魔法与力量体系",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "微软公司的创始人是谁？",
+      "top1_score": 0.7917,
+      "top1_title": "六、势力与组织>5. 游隼邮差（the Falcon Courier）",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "怎样提高英语口语水平？",
+      "top1_score": 0.784,
+      "top1_title": "四、魔法与力量体系>2. 猫族的专属能力",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "感冒了应该吃什么药？",
+      "top1_score": 0.7647,
+      "top1_title": "二、地理与主要城邦>1. 北境·霜牙公国（Duchy of Frostfang）",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "北京的地铁票价怎么计算？",
+      "top1_score": 0.7601,
+      "top1_title": "二、地理与主要城邦>1. 北境·霜牙公国（Duchy of Frostfang）",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "量子力学的基本原理是什么？",
+      "top1_score": 0.8435,
+      "top1_title": "一、世界观总览>3. 核心母题",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "怎么写一份好的求职简历？",
+      "top1_score": 0.797,
+      "top1_title": "七、角色档案：咪啦（小咪 / Mila）>3. 性格侧写",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "世界杯冠军是哪支球队？",
+      "top1_score": 0.7953,
+      "top1_title": "六、势力与组织>4. 翠语议会（the Verdant Council）",
+      "blocked": true
+    },
+    {
+      "kind": "negative",
+      "query": "推荐几部好看的电视剧",
+      "top1_score": 0.8119,
+      "top1_title": "九、成长弧线与剧情钩子>1. 三幕式主线",
+      "blocked": true
+    }
+  ],
+  "hard_negatives": [
+    {
+      "kind": "hard_negative",
+      "query": "现实中的猫有哪些品种？",
+      "top1_score": 0.8875,
+      "top1_title": "三、种族与猫族的地位>3. \"猫娘\"意味着什么",
+      "blocked": false
+    },
+    {
+      "kind": "hard_negative",
+      "query": "中世纪欧洲的骑士团是怎么运作的？",
+      "top1_score": 0.8396,
+      "top1_title": "六、势力与组织>1. 光明圣教（the Lumen Church）",
+      "blocked": true
+    },
+    {
+      "kind": "hard_negative",
+      "query": "月亮的阴晴圆缺多少天一个周期？",
+      "top1_score": 0.8545,
+      "top1_title": "一、世界观总览>2. 纪元与时代氛围",
+      "blocked": false
+    },
+    {
+      "kind": "hard_negative",
+      "query": "在家养猫需要注意什么？",
+      "top1_score": 0.8915,
+      "top1_title": "十、文化习俗与日常细节>2. 人类对待猫娘的\"规矩\"（暗黑幽默向）",
+      "blocked": false
+    }
+  ],
+  "threshold_scan": [
+    {
+      "threshold": 0.78,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 0.3333,
+      "hard_block_rate": 0.0,
+      "accuracy": 0.6
+    },
+    {
+      "threshold": 0.8,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 0.75,
+      "hard_block_rate": 0.0,
+      "accuracy": 0.7667
+    },
+    {
+      "threshold": 0.82,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 0.8333,
+      "hard_block_rate": 0.0,
+      "accuracy": 0.8
+    },
+    {
+      "threshold": 0.83,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 0.9167,
+      "hard_block_rate": 0.0,
+      "accuracy": 0.8333
+    },
+    {
+      "threshold": 0.84,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 0.9167,
+      "hard_block_rate": 0.25,
+      "accuracy": 0.8667
+    },
+    {
+      "threshold": 0.85,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 1.0,
+      "hard_block_rate": 0.25,
+      "accuracy": 0.9
+    },
+    {
+      "threshold": 0.86,
+      "pos_pass_rate": 1.0,
+      "neg_block_rate": 1.0,
+      "hard_block_rate": 0.5,
+      "accuracy": 0.9333
+    },
+    {
+      "threshold": 0.88,
+      "pos_pass_rate": 0.7143,
+      "neg_block_rate": 1.0,
+      "hard_block_rate": 0.5,
+      "accuracy": 0.8
+    },
+    {
+      "threshold": 0.9,
+      "pos_pass_rate": 0.5714,
+      "neg_block_rate": 1.0,
+      "hard_block_rate": 1.0,
+      "accuracy": 0.8
+    }
+  ],
+  "score_gap_scan": [
+    {
+      "gap": 0.0,
+      "coverage": 0.7857,
+      "avg_titles": 1.0,
+      "p90_titles": 1.0,
+      "max_titles": 1,
+      "hard_injected_titles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "gap": 0.01,
+      "coverage": 0.7857,
+      "avg_titles": 1.29,
+      "p90_titles": 2.0,
+      "max_titles": 2,
+      "hard_injected_titles": [
+        2,
+        3,
+        1
+      ]
+    },
+    {
+      "gap": 0.02,
+      "coverage": 1.0,
+      "avg_titles": 1.71,
+      "p90_titles": 3.0,
+      "max_titles": 4,
+      "hard_injected_titles": [
+        6,
+        4,
+        1
+      ]
+    },
+    {
+      "gap": 0.03,
+      "coverage": 1.0,
+      "avg_titles": 2.57,
+      "p90_titles": 4.7,
+      "max_titles": 6,
+      "hard_injected_titles": [
+        6,
+        6,
+        1
+      ]
+    },
+    {
+      "gap": 0.04,
+      "coverage": 1.0,
+      "avg_titles": 3.21,
+      "p90_titles": 5.0,
+      "max_titles": 6,
+      "hard_injected_titles": [
+        6,
+        6,
+        1
+      ]
+    },
+    {
+      "gap": 0.05,
+      "coverage": 1.0,
+      "avg_titles": 3.86,
+      "p90_titles": 6.0,
+      "max_titles": 6,
+      "hard_injected_titles": [
+        6,
+        6,
+        2
+      ]
+    },
+    {
+      "gap": 0.08,
+      "coverage": 1.0,
+      "avg_titles": 4.93,
+      "p90_titles": 6.0,
+      "max_titles": 6,
+      "hard_injected_titles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "gap": 0.1,
+      "coverage": 1.0,
+      "avg_titles": 5.5,
+      "p90_titles": 6.0,
+      "max_titles": 6,
+      "hard_injected_titles": [
+        6,
+        6,
+        6
+      ]
+    }
+  ]
+}
